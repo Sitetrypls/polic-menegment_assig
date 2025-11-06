@@ -3,160 +3,181 @@
 <head>
 <meta charset="UTF-8">
 <title>SAQSY — Dashboard</title>
+<link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
 <style>
-body {
-    margin: 0;
-    background: #0D1B2A;
-    font-family: Arial, sans-serif;
-    color: #fff;
-    display: flex;
-    height: 100vh;
-}
-
-/* Sidebar */
-.sidebar {
-    width: 230px;
-    background: #1B263B;
-    padding: 30px 0;
-    border-right: 2px solid #415A77;
-}
-.logo {
-    font-size: 28px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 40px;
-}
-.menu a {
-    display: block;
-    padding: 18px 30px;
-    color: #dfe6ee;
-    text-decoration: none;
-    font-size: 17px;
-    transition: .2s;
-}
-.menu a:hover, .active {
-    background: #415A77;
-    color: #fff;
-}
-
-/* Content */
 .content {
-    flex: 1;
-    padding: 40px;
-}
-h1 {
-    font-size: 32px;
-    margin-bottom: 25px;
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
 }
 
-/* Cards */
-.cards {
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 25px;
+h1 {
+  font-size: 35px;
+  margin-bottom: 25px;
 }
+
+.card-box {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+  gap: 28px;
+}
+
 .card {
-    background: #1B263B;
-    padding: 25px;
-    border-radius: 10px;
-    border: 1px solid #415A77;
-    text-align: center;
-    transition: .2s;
-    cursor: pointer;
+  background: var(--panel-dark);
+  padding: 25px;
+  border-radius: 15px;
+  border: 1px solid var(--accent-2);
+  transition: 0.25s;
+  cursor: pointer;
+}
+html.light-theme .card {
+  background: var(--panel-light);
 }
 .card:hover {
-    transform: scale(1.05);
-    background: #415A77;
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.22);
 }
-.card-icon {
-    font-size: 36px;
-    margin-bottom: 15px;
+.card i {
+  font-size: 50px;
+  color: var(--accent);
+  margin-bottom: 15px;
 }
 .card-title {
-    font-size: 18px;
-    font-weight: bold;
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 8px;
 }
-.lang-switch {
-    text-align: center;
-    margin-top: 20px;
-}
-.lang-switch button {
-    background: none;
-    border: 1px solid #4DA3FF;
-    padding: 4px 10px;
-    color: #4DA3FF;
-    border-radius: 5px;
-    margin: 0 4px;
-    cursor: pointer;
-}
-.lang-switch button:hover {
-    background: #4DA3FF;
-    color: #fff;
+.card-text {
+  opacity: 0.85;
+  font-size: 16px;
 }
 </style>
 </head>
 
 <body>
 
+<!-- Sidebar -->
 <div class="sidebar">
-    <div class="logo" data-i18n="brand">SAQSY</div>
+  <div class="logo" data-i18n="brand">SAQSY</div>
 
-    <div class="menu">
-        <a href="#" class="active"><i class="fa-solid fa-house"></i> <span data-i18n="menu_home">Home</span></a>
-        <a href="map.html"><i class="fa-solid fa-map"></i> <span data-i18n="menu_map">Map</span></a>
-        <a href="officers.html"><i class="fa-solid fa-users"></i> <span data-i18n="menu_officers">Officers</span></a>
-        <a href="reports.html"><i class="fa-solid fa-file"></i> <span data-i18n="menu_reports">Reports</span></a>
-        <a href="profile.html"><i class="fa-solid fa-user"></i> <span data-i18n="menu_profile">Profile</span></a>
-        <a href="settings.html"><i class="fa-solid fa-gear"></i> <span data-i18n="menu_settings">Settings</span></a>
-    </div>
-
-    <div class="lang-switch">
-        <button onclick="setLang('en')">EN</button>
-        <button onclick="setLang('ru')">RU</button>
-        <button onclick="setLang('kz')">KZ</button>
-    </div>
+  <div class="menu">
+    <a href="#" class="active"><i class="fa-solid fa-house"></i> <span data-i18n="menu_home">Home</span></a>
+    <a href="map.html"><i class="fa-solid fa-map"></i> <span data-i18n="menu_map">Map</span></a>
+    <a href="officers.html"><i class="fa-solid fa-users"></i> <span data-i18n="menu_officers">Officers</span></a>
+    <a href="reports.html"><i class="fa-solid fa-file"></i> <span data-i18n="menu_reports">Reports</span></a>
+    <a href="profile.html"><i class="fa-solid fa-user"></i> <span data-i18n="menu_profile">Profile</span></a>
+    <a href="settings.html"><i class="fa-solid fa-gear"></i> <span data-i18n="menu_settings">Settings</span></a>
+  </div>
 </div>
 
+<!-- The TopBar auto-inserted by app.js -->
+
+<!-- MAIN CONTENT -->
 <div class="content">
-    <h1 data-i18n="dashboard_title">Dashboard</h1>
+  <h1 data-i18n="dash_title">Dashboard</h1>
 
-    <div class="cards">
-        <div class="card" onclick="goto('map.html')">
-            <div class="card-icon"><i class="fa-solid fa-map"></i></div>
-            <div class="card-title" data-i18n="card_map">Map</div>
-        </div>
+  <div class="card-box">
 
-        <div class="card" onclick="goto('officers.html')">
-            <div class="card-icon"><i class="fa-solid fa-users"></i></div>
-            <div class="card-title" data-i18n="card_officers">Officers</div>
-        </div>
+      <div class="card" onclick="go('map.html')">
+        <i class="fa-solid fa-map"></i>
+        <div class="card-title" data-i18n="dash_map">Map</div>
+        <div class="card-text" data-i18n="dash_map_desc">View officers on map</div>
+      </div>
 
-        <div class="card" onclick="goto('reports.html')">
-            <div class="card-icon"><i class="fa-solid fa-file"></i></div>
-            <div class="card-title" data-i18n="card_reports">Reports</div>
-        </div>
-    </div>
+      <div class="card" onclick="go('officers.html')">
+        <i class="fa-solid fa-users"></i>
+        <div class="card-title" data-i18n="dash_officers">Officers</div>
+        <div class="card-text" data-i18n="dash_officers_desc">Manage police staff</div>
+      </div>
+
+      <div class="card" onclick="go('reports.html')">
+        <i class="fa-solid fa-file-alt"></i>
+        <div class="card-title" data-i18n="dash_reports">Reports</div>
+        <div class="card-text" data-i18n="dash_reports_desc">Citizen reports</div>
+      </div>
+
+      <div class="card" onclick="go('settings.html')">
+        <i class="fa-solid fa-gear"></i>
+        <div class="card-title" data-i18n="dash_settings">Settings</div>
+        <div class="card-text" data-i18n="dash_settings_desc">System configuration</div>
+      </div>
+
+  </div>
 </div>
 
 <script>
+function go(url){ window.location.href = url; }
+
 const translations = {
-en:{brand:"SAQSY",menu_home:"Home",menu_map:"Map",menu_officers:"Officers",menu_reports:"Reports",menu_profile:"Profile",menu_settings:"Settings",
-dashboard_title:"Dashboard",card_map:"Map",card_officers:"Officers",card_reports:"Reports"},
-ru:{brand:"SAQSY",menu_home:"Главная",menu_map:"Карта",menu_officers:"Офицеры",menu_reports:"Заявления",menu_profile:"Профиль",menu_settings:"Настройки",
-dashboard_title:"Панель управления",card_map:"Карта",card_officers:"Офицеры",card_reports:"Заявления"},
-kz:{brand:"SAQSY",menu_home:"Басты бет",menu_map:"Карта",menu_officers:"Офицерлер",menu_reports:"Өтініштер",menu_profile:"Профиль",menu_settings:"Баптаулар",
-dashboard_title:"Басқару беті",card_map:"Карта",card_officers:"Офицерлер",card_reports:"Өтініштер"}
+en:{
+  brand:"SAQSY",
+  menu_home:"Home",
+  menu_map:"Map",
+  menu_officers:"Officers",
+  menu_reports:"Reports",
+  menu_profile:"Profile",
+  menu_settings:"Settings",
+  
+  dash_title:"Dashboard",
+  dash_map:"Map",
+  dash_map_desc:"View officers on map",
+  dash_officers:"Officers",
+  dash_officers_desc:"Manage police staff",
+  dash_reports:"Reports",
+  dash_reports_desc:"Citizen reports",
+  dash_settings:"Settings",
+  dash_settings_desc:"System configuration"
+},
+ru:{
+  brand:"SAQSY",
+  menu_home:"Главная",
+  menu_map:"Карта",
+  menu_officers:"Офицеры",
+  menu_reports:"Заявления",
+  menu_profile:"Профиль",
+  menu_settings:"Настройки",
+
+  dash_title:"Панель управления",
+  dash_map:"Карта",
+  dash_map_desc:"Просмотр офицеров на карте",
+  dash_officers:"Офицеры",
+  dash_officers_desc:"Управление сотрудниками",
+  dash_reports:"Заявления",
+  dash_reports_desc:"Оповещения граждан",
+  dash_settings:"Настройки",
+  dash_settings_desc:"Конфигурация системы"
+},
+kz:{
+  brand:"SAQSY",
+  menu_home:"Басты бет",
+  menu_map:"Карта",
+  menu_officers:"Офицерлер",
+  menu_reports:"Өтініштер",
+  menu_profile:"Профиль",
+  menu_settings:"Баптаулар",
+
+  dash_title:"Бақылау тақтасы",
+  dash_map:"Карта",
+  dash_map_desc:"Картада офицерлерді көру",
+  dash_officers:"Офицерлер",
+  dash_officers_desc:"Қызметкерлерді басқару",
+  dash_reports:"Өтініштер",
+  dash_reports_desc:"Азаматтар өтініштері",
+  dash_settings:"Баптаулар",
+  dash_settings_desc:"Жүйені баптау"
+}
 };
 
-function setLang(lang){localStorage.setItem("lang",lang);updateLang();}
 function updateLang(){
-const lang=localStorage.getItem("lang")||"en";
-document.querySelectorAll("[data-i18n]").forEach(el=>{
-const key=el.getAttribute("data-i18n");
-el.textContent=translations[lang][key];
-});
+  const lang = localStorage.getItem('saqsy_lang') || 'en';
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const key = el.getAttribute("data-i18n");
+    if(translations[lang][key]) el.textContent = translations[lang][key];
+  });
 }
+
 updateLang();
 </script>
 
