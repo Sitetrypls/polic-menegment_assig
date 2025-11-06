@@ -3,217 +3,150 @@
 <head>
 <meta charset="UTF-8">
 <title>SAQSY — Settings</title>
+<link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
 <style>
-body {
-    margin: 0;
-    background: #0D1B2A;
-    font-family: Arial, sans-serif;
-    color: #fff;
-    display: flex;
-    height: 100vh;
-}
-
-/* Sidebar */
-.sidebar {
-    width: 230px;
-    background: #1B263B;
-    padding: 30px 0;
-    border-right: 2px solid #415A77;
-}
-.logo {
-    font-size: 28px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 40px;
-}
-.menu a {
-    display: block;
-    padding: 18px 30px;
-    color: #dfe6ee;
-    text-decoration: none;
-    font-size: 17px;
-    transition: .2s;
-}
-.menu a:hover, .active {
-    background: #415A77;
-    color: #fff;
-}
-
-/* Content */
 .content {
-    flex: 1;
-    padding: 40px;
-}
-h1 {font-size: 32px;margin-bottom: 25px;}
-
-.switch {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 14px 0;
-    border-bottom: 1px solid #415A77;
-    cursor: pointer;
+  flex: 1;
+  padding: 40px;
 }
 
-/* ✅ Animated toggle */
-.toggle {
-    position: relative;
-    width: 50px;
-    height: 26px;
-}
-.toggle input {
-    display: none;
-}
-.slider {
-    position: absolute;
-    cursor: pointer;
-    background: #777;
-    border-radius: 20px;
-    width: 100%;
-    height: 100%;
-    transition: .3s;
-}
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 20px;
-    width: 20px;
-    left: 3px;
-    bottom: 3px;
-    background: #fff;
-    border-radius: 50%;
-    transition: .3s;
-}
-input:checked + .slider {
-    background: #3D8BFF;
-}
-input:checked + .slider:before {
-    transform: translateX(24px);
+h1 {
+  font-size: 32px;
+  margin-bottom: 25px;
 }
 
-/* ✅ Button animation */
-.btn {
-    margin-top: 30px;
-    width: 100%;
-    padding: 14px;
-    background: #3D8BFF;
-    border-radius: 10px;
-    font-size: 19px;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    transition: .2s;
+.setting-box {
+  background: var(--panel-dark);
+  padding: 22px;
+  border-radius: 12px;
+  margin-bottom: 18px;
+  border: 1px solid var(--accent-2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.btn:hover {
-    background: #1F6EF4;
-    transform: scale(1.03);
-}
-.btn:active {
-    transform: scale(0.97);
+html.light-theme .setting-box {
+  background: var(--panel-light);
 }
 
-/* Save message */
-.success {
-    display: none;
-    background: #2ECC71;
-    color: #fff;
-    padding: 14px;
-    margin-top: 15px;
-    border-radius: 10px;
-    text-align: center;
-    font-weight: bold;
+.setting-title {
+  font-size: 20px;
+  font-weight: 700;
 }
 
-/* Lang */
-.lang-switch {text-align:center;margin-top:20px;}
-.lang-switch button {background:none;border:1px solid #4DA3FF;padding:4px 10px;color:#4DA3FF;border-radius:5px;margin:0 4px;cursor:pointer;}
-.lang-switch button:hover {background:#4DA3FF;color:#fff;}
-
+select {
+  padding: 10px;
+  font-size: 15px;
+  border-radius: 10px;
+  background: #E0E5EB;
+  border: none;
+}
 </style>
 </head>
 
 <body>
 
 <div class="sidebar">
-    <div class="logo" data-i18n="brand">SAQSY</div>
-    <div class="menu">
-        <a href="dashboard.html"><i class="fa-solid fa-house"></i> <span data-i18n="menu_home">Home</span></a>
-        <a href="map.html"><i class="fa-solid fa-map"></i> <span data-i18n="menu_map">Map</span></a>
-        <a href="officers.html"><i class="fa-solid fa-users"></i> <span data-i18n="menu_officers">Officers</span></a>
-        <a href="reports.html"><i class="fa-solid fa-file"></i> <span data-i18n="menu_reports">Reports</span></a>
-        <a href="profile.html"><i class="fa-solid fa-user"></i> <span data-i18n="menu_profile">Profile</span></a>
-        <a href="#" class="active"><i class="fa-solid fa-gear"></i> <span data-i18n="menu_settings">Settings</span></a>
-    </div>
+  <div class="logo" data-i18n="brand">SAQSY</div>
 
-    <div class="lang-switch">
-        <button onclick="setLang('en')">EN</button>
-        <button onclick="setLang('ru')">RU</button>
-        <button onclick="setLang('kz')">KZ</button>
-    </div>
+  <div class="menu">
+    <a href="dashboard.html"><i class="fa-solid fa-house"></i> <span data-i18n="menu_home">Home</span></a>
+    <a href="map.html"><i class="fa-solid fa-map"></i> <span data-i18n="menu_map">Map</span></a>
+    <a href="officers.html"><i class="fa-solid fa-users"></i> <span data-i18n="menu_officers">Officers</span></a>
+    <a href="reports.html"><i class="fa-solid fa-file"></i> <span data-i18n="menu_reports">Reports</span></a>
+    <a href="profile.html"><i class="fa-solid fa-user"></i> <span data-i18n="menu_profile">Profile</span></a>
+    <a href="#" class="active"><i class="fa-solid fa-gear"></i> <span data-i18n="menu_settings">Settings</span></a>
+  </div>
 </div>
 
+<!-- TopBar auto added -->
+
 <div class="content">
-    <h1 data-i18n="settings_title">Settings</h1>
 
-    <div class="switch">
-        <label data-i18n="notif">Notifications</label>
-        <label class="toggle">
-            <input type="checkbox" id="notif">
-            <span class="slider"></span>
-        </label>
-    </div>
+  <h1 data-i18n="settings_title">Settings</h1>
 
-    <div class="switch">
-        <label data-i18n="sound">Sound Effects</label>
-        <label class="toggle">
-            <input type="checkbox" id="sound">
-            <span class="slider"></span>
-        </label>
-    </div>
+  <!-- Theme -->
+  <div class="setting-box">
+    <div class="setting-title" data-i18n="theme">Theme</div>
+    <button class="btn" onclick="toggleTheme()" data-i18n="toggle_theme">Toggle</button>
+  </div>
 
-    <button class="btn" onclick="saveSettings()" data-i18n="save_btn">Save Settings</button>
+  <!-- Language -->
+  <div class="setting-box">
+    <div class="setting-title" data-i18n="language">Language</div>
+    <select id="langSelect" onchange="changeLanguage()">
+      <option value="en">English</option>
+      <option value="ru">Русский</option>
+      <option value="kz">Қазақша</option>
+    </select>
+  </div>
 
-    <div class="success" id="ok" data-i18n="saved_msg">✅ Saved!</div>
 </div>
 
 <script>
-function saveSettings(){
-    localStorage.setItem("notif", document.getElementById("notif").checked);
-    localStorage.setItem("sound", document.getElementById("sound").checked);
+// Apply saved language to select dropdown
+document.getElementById("langSelect").value = localStorage.getItem("saqsy_lang") || "en";
 
-    document.getElementById("ok").style.display="block";
-    setTimeout(()=>document.getElementById("ok").style.display="none",2000);
+function changeLanguage(){
+  const lang = document.getElementById("langSelect").value;
+  localStorage.setItem("saqsy_lang", lang);
+  updateLang();
 }
 
-// ✅ load saved values
-if(localStorage.getItem("notif")==="true") document.getElementById("notif").checked = true;
-if(localStorage.getItem("sound")==="true") document.getElementById("sound").checked = true;
+// --------- Translations ----------
+const translations = {
+en:{
+  brand:"SAQSY",
+  menu_home:"Home",
+  menu_map:"Map",
+  menu_officers:"Officers",
+  menu_reports:"Reports",
+  menu_profile:"Profile",
+  menu_settings:"Settings",
 
-// ✅ i18n translations
-const translations={
-en:{brand:"SAQSY",menu_home:"Home",menu_map:"Map",menu_officers:"Officers",menu_reports:"Reports",
-menu_profile:"Profile",menu_settings:"Settings",settings_title:"Settings",
-notif:"Notifications",sound:"Sound Effects",save_btn:"Save Settings",saved_msg:"✅ Saved!"
+  settings_title:"Settings",
+  theme:"Theme",
+  toggle_theme:"Toggle",
+  language:"Language",
 },
-ru:{brand:"SAQSY",menu_home:"Главная",menu_map:"Карта",menu_officers:"Офицеры",menu_reports:"Заявления",
-menu_profile:"Профиль",menu_settings:"Настройки",settings_title:"Настройки",
-notif:"Уведомления",sound:"Звуки",save_btn:"Сохранить",saved_msg:"✅ Сохранено!"
+ru:{
+  brand:"SAQSY",
+  menu_home:"Главная",
+  menu_map:"Карта",
+  menu_officers:"Офицеры",
+  menu_reports:"Заявления",
+  menu_profile:"Профиль",
+  menu_settings:"Настройки",
+
+  settings_title:"Настройки",
+  theme:"Тема",
+  toggle_theme:"Переключить",
+  language:"Язык",
 },
-kz:{brand:"SAQSY",menu_home:"Басты бет",menu_map:"Карта",menu_officers:"Офицерлер",
-menu_reports:"Өтініштер",menu_profile:"Профиль",menu_settings:"Баптаулар",settings_title:"Баптаулар",
-notif:"Хабарламалар",sound:"Дыбыстар",save_btn:"Сақтау",saved_msg:"✅ Сәтті сақталды!"
+kz:{
+  brand:"SAQSY",
+  menu_home:"Басты бет",
+  menu_map:"Карта",
+  menu_officers:"Офицерлер",
+  menu_reports:"Өтініштер",
+  menu_profile:"Профиль",
+  menu_settings:"Баптаулар",
+
+  settings_title:"Баптаулар",
+  theme:"Тақырып",
+  toggle_theme:"Ауыстыру",
+  language:"Тіл",
 }
 };
 
-function setLang(lang){localStorage.setItem("lang",lang);updateLang();}
 function updateLang(){
-const lang=localStorage.getItem("lang")||"en";
-document.querySelectorAll("[data-i18n]").forEach(el=>{
-el.textContent=translations[lang][el.getAttribute("data-i18n")];
-});
+  const lang = localStorage.getItem('saqsy_lang') || 'en';
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const key = el.getAttribute("data-i18n");
+    if(translations[lang][key]) el.textContent = translations[lang][key];
+  });
 }
 updateLang();
 </script>
