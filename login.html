@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SAQSY — Login</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: #0D1B2A;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card {
+    background: #1B263B;
+    width: 400px;
+    padding: 40px;
+    border-radius: 14px;
+    border: 1px solid #415A77;
+    text-align: center;
+}
+.logo {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #4DA3FF;
+}
+label {
+    display: block;
+    margin: 15px 0 6px;
+    text-align: left;
+}
+input {
+    width: 100%;
+    padding: 13px;
+    border-radius: 10px;
+    border: none;
+    background: #E0E5EB;
+}
+.btn {
+    width: 100%;
+    padding: 15px;
+    margin-top: 25px;
+    background: #3D8BFF;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btn:hover {
+    background: #1F6EF4;
+    transform: scale(1.03);
+}
+
+.switch-link {
+    margin-top: 15px;
+}
+.switch-link a {
+    color: #4DA3FF;
+    text-decoration: none;
+    font-weight: bold;
+}
+.switch-link a:hover {
+    text-decoration: underline;
+}
+
+.lang-switch {
+    margin-top: 20px;
+}
+.lang-switch button {
+    background: none;
+    border: 1px solid #4DA3FF;
+    padding: 4px 10px;
+    color: #4DA3FF;
+    border-radius: 5px;
+    margin: 0 4px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.lang-switch button:hover {
+    background: #4DA3FF;
+    color: #fff;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <div class="logo" data-i18n="brand">SAQSY</div>
+    <h2 data-i18n="login_title">Sign in</h2>
+
+    <label data-i18n="email">Email</label>
+    <input type="email" placeholder="you@email.com">
+
+    <label data-i18n="password">Password</label>
+    <input type="password" placeholder="••••••••">
+
+    <button class="btn" onclick="goDashboard()" data-i18n="login_btn">Sign In</button>
+
+    <div class="switch-link">
+        <span data-i18n="no_account">No account?</span>
+        <a href="#" data-i18n="register_link">Register</a>
+    </div>
+
+    <div class="lang-switch">
+        <button onclick="setLang('en')">EN</button>
+        <button onclick="setLang('ru')">RU</button>
+        <button onclick="setLang('kz')">KZ</button>
+    </div>
+</div>
+
+
+<script>
+function goDashboard() {
+    window.location.href = "dashboard.html"; // поменяем когда создадим
+}
+
+const translations = {
+    en: {
+        brand: "SAQSY",
+        login_title: "Sign in",
+        email: "Email",
+        password: "Password",
+        login_btn: "Sign In",
+        no_account: "No account?",
+        register_link: "Register"
+    },
+    ru: {
+        brand: "SAQSY",
+        login_title: "Вход",
+        email: "Электронная почта",
+        password: "Пароль",
+        login_btn: "Войти",
+        no_account: "Нет аккаунта?",
+        register_link: "Регистрация"
+    },
+    kz: {
+        brand: "SAQSY",
+        login_title: "Кіру",
