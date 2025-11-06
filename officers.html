@@ -29,3 +29,206 @@ body {
     margin-bottom: 40px;
 }
 .menu a {
+    display: block;
+    padding: 18px 30px;
+    color: #dfe6ee;
+    text-decoration: none;
+    font-size: 17px;
+    transition: .2s;
+}
+.menu a:hover, .active {
+    background: #415A77;
+    color: #fff;
+}
+
+/* Content */
+.content {
+    flex: 1;
+    padding: 40px;
+}
+h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+/* Table */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.table th {
+    text-align: left;
+    padding: 10px;
+    font-size: 16px;
+    opacity: 0.8;
+}
+.table td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #415A77;
+}
+.avatar {
+    width: 40px;
+    height: 40px;
+    background: #4DA3FF;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+    font-weight: bold;
+    color: #fff;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+/* Status */
+.status {
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+.on-duty { background: #2ECC71; }
+.available { background: #3498DB; }
+.patrol { background: #F1C40F; }
+
+.lang-switch {
+    text-align: center;
+    margin-top: 20px;
+}
+.lang-switch button {
+    background: none;
+    border: 1px solid #4DA3FF;
+    padding: 4px 10px;
+    color: #4DA3FF;
+    border-radius: 5px;
+    margin: 0 4px;
+    cursor: pointer;
+}
+.lang-switch button:hover {
+    background: #4DA3FF;
+    color: #fff;
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+    <div class="logo" data-i18n="brand">SAQSY</div>
+
+    <div class="menu">
+        <a href="dashboard.html"><i class="fa-solid fa-house"></i> <span data-i18n="menu_home">Home</span></a>
+        <a href="map.html"><i class="fa-solid fa-map"></i> <span data-i18n="menu_map">Map</span></a>
+        <a href="#" class="active"><i class="fa-solid fa-users"></i> <span data-i18n="menu_officers">Officers</span></a>
+        <a href="reports.html"><i class="fa-solid fa-file"></i> <span data-i18n="menu_reports">Reports</span></a>
+        <a href="profile.html"><i class="fa-solid fa-user"></i> <span data-i18n="menu_profile">Profile</span></a>
+        <a href="settings.html"><i class="fa-solid fa-gear"></i> <span data-i18n="menu_settings">Settings</span></a>
+    </div>
+
+    <div class="lang-switch">
+        <button onclick="setLang('en')">EN</button>
+        <button onclick="setLang('ru')">RU</button>
+        <button onclick="setLang('kz')">KZ</button>
+    </div>
+</div>
+
+<div class="content">
+    <h1 data-i18n="officers_title">Officers</h1>
+
+    <table class="table">
+        <tr>
+            <th data-i18n="th_name">Name</th>
+            <th data-i18n="th_rank">Rank</th>
+            <th data-i18n="th_station">Station</th>
+            <th data-i18n="th_status">Status</th>
+        </tr>
+
+        <tr>
+            <td><div class="avatar">НӘ</div> <span data-i18n="o1_name">Nurzhan Adilbekov</span></td>
+            <td data-i18n="o1_rank">Captain</td>
+            <td data-i18n="o1_station">Central</td>
+            <td><span class="status on-duty" data-i18n="on_duty">On Duty</span></td>
+        </tr>
+
+        <tr>
+            <td><div class="avatar">АҚ</div> <span data-i18n="o2_name">Aidana Kair</span></td>
+            <td data-i18n="o2_rank">Sergeant</td>
+            <td data-i18n="o2_station">North</td>
+            <td><span class="status available" data-i18n="available">Available</span></td>
+        </tr>
+
+        <tr>
+            <td><div class="avatar">ЕТ</div> <span data-i18n="o3_name">Yerlan Tursynov</span></td>
+            <td data-i18n="o3_rank">Officer</td>
+            <td data-i18n="o3_station">South</td>
+            <td><span class="status patrol" data-i18n="patrol">Patrol</span></td>
+        </tr>
+
+        <tr>
+            <td><div class="avatar">МС</div> <span data-i18n="o4_name">Moldir Serik</span></td>
+            <td data-i18n="o4_rank">Lieutenant</td>
+            <td data-i18n="o4_station">Central</td>
+            <td><span class="status available" data-i18n="available">Available</span></td>
+        </tr>
+
+        <tr>
+            <td><div class="avatar">АБ</div> <span data-i18n="o5_name">Ayan Beken</span></td>
+            <td data-i18n="o5_rank">Officer</td>
+            <td data-i18n="o5_station">North</td>
+            <td><span class="status on-duty" data-i18n="on_duty">On Duty</span></td>
+        </tr>
+    </table>
+</div>
+
+<script>
+const translations = {
+    en: {
+        brand:"SAQSY",menu_home:"Home",menu_map:"Map",menu_officers:"Officers",
+        menu_reports:"Reports",menu_profile:"Profile",menu_settings:"Settings",
+        officers_title:"Officers",th_name:"Name",th_rank:"Rank",th_station:"Station",th_status:"Status",
+        on_duty:"On Duty",available:"Available",patrol:"Patrol",
+        o1_name:"Nurzhan Adilbekov",o1_rank:"Captain",o1_station:"Central",
+        o2_name:"Aidana Kair",o2_rank:"Sergeant",o2_station:"North",
+        o3_name:"Yerlan Tursynov",o3_rank:"Officer",o3_station:"South",
+        o4_name:"Moldir Serik",o4_rank:"Lieutenant",o4_station:"Central",
+        o5_name:"Ayan Beken",o5_rank:"Officer",o5_station:"North"
+    },
+    ru: {
+        brand:"SAQSY",menu_home:"Главная",menu_map:"Карта",menu_officers:"Офицеры",
+        menu_reports:"Заявления",menu_profile:"Профиль",menu_settings:"Настройки",
+        officers_title:"Офицеры",th_name:"Имя",th_rank:"Звание",th_station:"Станция",th_status:"Статус",
+        on_duty:"Дежурит",available:"Свободен",patrol:"Патруль",
+        o1_name:"Нұржан Әділбеков",o1_rank:"Капитан",o1_station:"Центральная",
+        o2_name:"Айдана Қайыр",o2_rank:"Сержант",o2_station:"Северная",
+        o3_name:"Ерлан Тұрсынов",o3_rank:"Офицер",o3_station:"Южная",
+        o4_name:"Мөлдір Серік",o4_rank:"Лейтенант",o4_station:"Центральная",
+        o5_name:"Аян Бекен",o5_rank:"Офицер",o5_station:"Северная"
+    },
+    kz: {
+        brand:"SAQSY",menu_home:"Басты бет",menu_map:"Карта",menu_officers:"Офицерлер",
+        menu_reports:"Өтініштер",menu_profile:"Профиль",menu_settings:"Баптаулар",
+        officers_title:"Офицерлер",th_name:"Аты-жөні",th_rank:"Шені",th_station:"Бөлім",th_status:"Мәртебесі",
+        on_duty:"Қызметте",available:"Бос",patrol:"Патрульде",
+        o1_name:"Нұржан Әділбеков",o1_rank:"Капитан",o1_station:"Орталық",
+        o2_name:"Айдана Қайыр",o2_rank:"Сержант",o2_station:"Солтүстік",
+        o3_name:"Ерлан Тұрсынов",o3_rank:"Офицер",o3_station:"Оңтүстік",
+        o4_name:"Мөлдір Серік",o4_rank:"Лейтенант",o4_station:"Орталық",
+        o5_name:"Аян Бекен",o5_rank:"Офицер",o5_station:"Солтүстік"
+    }
+};
+
+function setLang(lang){
+    localStorage.setItem("lang",lang);
+    updateLang();
+}
+function updateLang(){
+    const lang=localStorage.getItem("lang")||"en";
+    document.querySelectorAll("[data-i18n]").forEach(el=>{
+        const key=el.getAttribute("data-i18n");
+        el.textContent=translations[lang][key];
+    });
+}
+updateLang();
+</script>
+
+<script src="app.js"></script>
+</body>
+</html>
