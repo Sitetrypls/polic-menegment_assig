@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SAQSY — Profile</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<style>
+body {
+    margin: 0;
+    background: #0D1B2A;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    display: flex;
+    height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 230px;
+    background: #1B263B;
+    padding: 30px 0;
+    border-right: 2px solid #415A77;
+}
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 40px;
+}
+.menu a {
+    display: block;
+    padding: 18px 30px;
+    color: #dfe6ee;
+    text-decoration: none;
+    font-size: 17px;
+    transition: 0.2s;
+}
+.menu a:hover, .active {
+    background: #415A77;
+    color: #fff;
+}
+
+/* Content */
+.content {
+    flex: 1;
+    padding: 40px;
+}
+h1 {
+    font-size: 32px;
+    margin-bottom: 25px;
+}
+
+.profile-box {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.avatar {
+    width: 120px;
+    height: 120px;
+    background: #4DA3FF;
+    border-radius: 50%;
+    font-size: 50px;
+    color: #fff;
+    margin: 0 auto 10px;
+    line-height: 120px;
+}
+.fullname {
+    font-size: 22px;
+    font-weight: bold;
+}
+.email {
+    opacity: 0.8;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin: 14px 0 8px;
+}
+input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    background: #E0E5EB;
+    border: none;
+}
+.btn {
+    margin-top: 30px;
+    width: 100%;
+    padding: 14px;
+    background: #3D8BFF;
+    border-radius: 10px;
+    font-size: 18px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: .25s;
+}
+.btn:hover {
+    background: #1F6EF4;
+    transform: scale(1.03);
+}
+
+.success {
+    display: none;
+    background: #2ECC71;
+    color: #fff;
+    padding: 14px;
+    margin-top: 15px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.lang-switch {
+    text-align: center;
+    margin-top: 20px;
+}
+.lang-switch button {
+    background: none;
+    border: 1px solid #4DA3FF;
+    padding: 4px 10px;
+    color: #4DA3FF;
+    border-radius: 5px;
+    margin: 0 4px;
+    cursor: pointer;
+}
+.lang-switch button:hover { background:#4DA3FF;color:#fff; }
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+    <div class="logo" data-i18n="brand">SAQSY</div>
+
+    <div class="menu">
+        <a href="dashboard.html"><i class="fa-solid fa-house"></i> <span data-i18n="menu_home">Home</span></a>
+        <a href="map.html"><i class="fa-solid fa-map"></i> <span data-i18n="menu_map">Map</span></a>
+        <a href="officers.html"><i class="fa-solid fa-users"></i> <span data-i18n="menu_officers">Officers</span></a>
+        <a href="reports.html"><i class="fa-solid fa-file"></i> <span data-i18n="menu_reports">Reports</span></a>
+        <a href="#" class="active"><i class="fa-solid fa-user"></i> <span data-i18n="menu_profile">Profile</span></a>
+    </div>
+
+    <div class="lang-switch">
+        <button onclick="setLang('en')">EN</button>
+        <button onclick="setLang('ru')">RU</button>
+        <button onclick="setL
