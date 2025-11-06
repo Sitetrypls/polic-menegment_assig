@@ -2,119 +2,149 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>SAQSY — Login</title>
+<title>SAQSY — Sign In</title>
+<link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
 <style>
-body {
-    margin: 0;
-    background: #0D1B2A;
-    color: #fff;
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+
+/* only page-specific styling */
+.main-box {
+  width: 380px;
+  margin: auto;
+  background: var(--panel-dark);
+  padding: 40px;
+  border-radius: 14px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.35);
+  transition: background 250ms ease;
 }
-.container {
-    width: 400px;
-    background: #1B263B;
-    padding: 40px;
-    border-radius: 15px;
-    text-align: center;
-    border: 1px solid #415A77;
+html.light-theme .main-box {
+  background: var(--panel-light);
+  box-shadow: 0 0 25px rgba(0,0,0,0.08);
 }
-h1 {
-    margin-bottom: 25px;
+
+.logo-big {
+  font-size: 48px;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
 }
+
+label {
+  display: block;
+  margin: 16px 0 6px;
+  font-size: 15px;
+}
+
 input {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
-    border-radius: 10px;
-    border: none;
-    background: #E0E5EB;
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  background: #E0E5EB;
+  border: none;
+  font-size: 16px;
+  margin-bottom: 10px;
 }
-.btn {
-    width: 100%;
-    padding: 12px;
-    background: #3D8BFF;
-    border: none;
-    border-radius: 10px;
-    font-size: 18px;
-    color: #fff;
-    font-weight: bold;
-    margin-top: 10px;
-    cursor: pointer;
+
+.btn-main {
+  width: 100%;
+  padding: 14px;
+  margin-top: 16px;
+  font-size: 18px;
+  background: var(--accent);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
 }
-.btn:hover {
-    background: #1F6EF4;
+
+.register-link {
+  text-align: center;
+  margin-top: 20px;
+  color: var(--muted);
 }
-.lang-switch button {
-    background: none;
-    border: 1px solid #4DA3FF;
-    padding: 4px 10px;
-    color: #4DA3FF;
-    border-radius: 5px;
-    margin: 0 4px;
-    cursor: pointer;
+.register-link a {
+  color: var(--accent);
+  font-weight: bold;
+  text-decoration: none;
 }
-.lang-switch button:hover {
-    background: #4DA3FF;
-    color: #fff;
-}
-.register {
-    margin-top: 15px;
-    cursor: pointer;
-    opacity: 0.8;
-}
-.register:hover {
-    opacity: 1;
-}
+
 </style>
 </head>
 
 <body>
 
-<div class="container">
-    <h1 data-i18n="login_title">Sign In</h1>
+<!-- TopBar автоматически добавляется через app.js -->
 
-    <input type="text" placeholder="Email" data-i18n-placeholder="email">
-    <input type="password" placeholder="Password" data-i18n-placeholder="password">
+<div style="display:flex;height:100vh;align-items:center;justify-content:center;">
+  <div class="main-box">
+      <div class="logo-big" data-i18n="brand">SAQSY</div>
 
-    <button class="btn" onclick="goto('dashboard.html')" data-i18n="signin_btn">Sign In</button>
+      <label data-i18n="email">Email</label>
+      <input type="email" placeholder="Enter email" data-i18n-placeholder="email_ph">
 
-    <div class="register" onclick="goto('register.html')" data-i18n="no_acc">
-        Create Account
-    </div>
+      <label data-i18n="password">Password</label>
+      <input type="password" placeholder="Enter password" data-i18n-placeholder="password_ph">
 
-    <div class="lang-switch" style="margin-top:20px;">
-        <button onclick="setLang('en')">EN</button>
-        <button onclick="setLang('ru')">RU</button>
-        <button onclick="setLang('kz')">KZ</button>
-    </div>
+      <button class="btn btn-main" onclick="login()" data-i18n="sign_in">Sign In</button>
+
+      <div class="register-link">
+        <span data-i18n="dont_have_acc">Don't have an account?</span>
+        <a href="register.html" data-i18n="register_link">Register</a>
+      </div>
+  </div>
 </div>
 
 <script>
-const translations = {
-    en:{login_title:"Sign In",email:"Email",password:"Password",signin_btn:"Sign In",no_acc:"Create Account"},
-    ru:{login_title:"Войти",email:"Эл. почта",password:"Пароль",signin_btn:"Войти",no_acc:"Создать аккаунт"},
-    kz:{login_title:"Кіру",email:"Email",password:"Құпия сөз",signin_btn:"Кіру",no_acc:"Тіркелу"}
-};
-
-function setLang(lang){
-    localStorage.setItem("lang",lang);
-    updateLang();
+// fake login redirect
+function login(){
+  window.location.href = "dashboard.html";
 }
 
+// translations for this page
+const translations = {
+en: {
+  brand:"SAQSY",
+  email:"Email",
+  email_ph:"Enter your email...",
+  password:"Password",
+  password_ph:"Enter your password...",
+  sign_in:"Sign In",
+  dont_have_acc:"Don't have an account?",
+  register_link:"Register"
+},
+ru: {
+  brand:"SAQSY",
+  email:"Почта",
+  email_ph:"Введите email...",
+  password:"Пароль",
+  password_ph:"Введите пароль...",
+  sign_in:"Войти",
+  dont_have_acc:"Нет аккаунта?",
+  register_link:"Регистрация"
+},
+kz: {
+  brand:"SAQSY",
+  email:"Email",
+  email_ph:"Email енгізіңіз...",
+  password:"Құпия сөз",
+  password_ph:"Құпия сөз енгізіңіз...",
+  sign_in:"Кіру",
+  dont_have_acc:"Аккаунт жоқ па?",
+  register_link:"Тіркелу"
+}
+};
+
 function updateLang(){
-    const lang = localStorage.getItem("lang") || "en";
-    document.querySelectorAll("[data-i18n]").forEach(el => {
-        el.textContent = translations[lang][el.getAttribute("data-i18n")];
-    });
-    document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
-        el.placeholder = translations[lang][el.getAttribute("data-i18n-placeholder")];
-    });
+  const lang = localStorage.getItem('saqsy_lang') || 'en';
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const key = el.getAttribute("data-i18n");
+    if(translations[lang][key]) el.textContent = translations[lang][key];
+  });
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{
+    const key = el.getAttribute("data-i18n-placeholder");
+    if(translations[lang][key]) el.placeholder = translations[lang][key];
+  });
 }
 updateLang();
 </script>
