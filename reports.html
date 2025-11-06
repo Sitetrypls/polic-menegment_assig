@@ -34,7 +34,7 @@ body {
     color: #dfe6ee;
     text-decoration: none;
     font-size: 17px;
-    transition: 0.2s;
+    transition: .2s;
 }
 .menu a:hover, .active {
     background: #415A77;
@@ -48,39 +48,38 @@ body {
 }
 h1 {
     font-size: 32px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 label {
     display: block;
-    margin: 14px 0 8px;
-    font-size: 16px;
+    margin: 12px 0 8px;
 }
-input, textarea, select {
+input, textarea {
     width: 100%;
     padding: 12px;
     border-radius: 10px;
     border: none;
     background: #E0E5EB;
+    margin-bottom: 10px;
     font-size: 15px;
 }
 textarea {
-    height: 100px;
+    height: 130px;
     resize: none;
 }
 
 .btn {
-    margin-top: 25px;
-    padding: 14px;
     width: 100%;
+    padding: 14px;
     background: #3D8BFF;
-    border: none;
     border-radius: 10px;
     font-size: 18px;
     color: #fff;
-    font-weight: bold;
+    border: none;
     cursor: pointer;
-    transition: 0.3s;
+    font-weight: bold;
+    margin-top: 10px;
 }
 .btn:hover {
     background: #1F6EF4;
@@ -92,12 +91,12 @@ textarea {
     background: #2ECC71;
     color: #fff;
     padding: 14px;
-    margin-top: 15px;
+    margin-top: 12px;
     border-radius: 10px;
     text-align: center;
-    font-weight: bold;
 }
 
+/* Language */
 .lang-switch {
     text-align: center;
     margin-top: 20px;
@@ -110,12 +109,8 @@ textarea {
     border-radius: 5px;
     margin: 0 4px;
     cursor: pointer;
-    transition: 0.3s;
 }
-.lang-switch button:hover {
-    background: #4DA3FF;
-    color: #fff;
-}
+.lang-switch button:hover {background:#4DA3FF;color:#fff;}
 </style>
 </head>
 
@@ -129,6 +124,7 @@ textarea {
         <a href="map.html"><i class="fa-solid fa-map"></i> <span data-i18n="menu_map">Map</span></a>
         <a href="officers.html"><i class="fa-solid fa-users"></i> <span data-i18n="menu_officers">Officers</span></a>
         <a href="#" class="active"><i class="fa-solid fa-file"></i> <span data-i18n="menu_reports">Reports</span></a>
+        <a href="profile.html"><i class="fa-solid fa-user"></i> <span data-i18n="menu_profile">Profile</span></a>
         <a href="settings.html"><i class="fa-solid fa-gear"></i> <span data-i18n="menu_settings">Settings</span></a>
     </div>
 
@@ -140,50 +136,69 @@ textarea {
 </div>
 
 <div class="content">
-    <h1 data-i18n="reports_title">File Report</h1>
+    <h1 data-i18n="reports_title">Reports</h1>
 
-    <label data-i18n="incident_type">Incident Type *</label>
-    <select>
-        <option data-i18n="select_incident">Select incident type</option>
-        <option data-i18n="incident_theft">Theft</option>
-        <option data-i18n="incident_accident">Accident</option>
-        <option data-i18n="incident_violence">Violence</option>
-    </select>
+    <label data-i18n="subject">Subject</label>
+    <input type="text" data-i18n-placeholder="subject">
 
-    <label data-i18n="location">Location *</label>
-    <input type="text" placeholder="Address / Description">
+    <label data-i18n="details">Details</label>
+    <textarea data-i18n-placeholder="describe"></textarea>
 
-    <label data-i18n="details">Incident Details *</label>
-    <textarea placeholder="Describe what happened..."></textarea>
+    <button class="btn" onclick="sendReport()" data-i18n="send_btn">
+        Send Report
+    </button>
 
-    <label data-i18n="priority">Priority</label>
-    <select>
-        <option data-i18n="usual">Usual</option>
-        <option data-i18n="high">High</option>
-    </select>
-
-    <button class="btn" onclick="sendReport()" data-i18n="send_btn">Submit Report</button>
-
-    <div class="success" id="ok" data-i18n="sent_msg">
-        ✅ Report sent successfully!
+    <div class="success" id="msg" data-i18n="success_msg">
+        ✅ Sent successfully!
     </div>
 </div>
 
 <script>
-function sendReport() {
-    document.getElementById("ok").style.display = "block";
-    setTimeout(() => {
-        document.getElementById("ok").style.display = "none";
-    }, 3000);
+function sendReport(){
+    document.getElementById("msg").style.display = "block";
+    setTimeout(()=> {
+        document.getElementById("msg").style.display = "none";
+    }, 2000);
 }
 
 const translations = {
-    en: {
-        brand: "SAQSY",
-        menu_home: "Home",
-        menu_map: "Map",
-        menu_officers: "Officers",
-        menu_reports: "Reports",
-        menu_settings: "Settings",
-        reports_title: "File Report",
-        incident
+en:{
+brand:"SAQSY",menu_home:"Home",menu_map:"Map",menu_officers:"Officers",menu_reports:"Reports",
+menu_profile:"Profile",menu_settings:"Settings",
+reports_title:"Submit Report",subject:"Subject",details:"Details",
+describe:"Describe incident...",send_btn:"Send Report",success_msg:"✅ Sent successfully!"
+},
+ru:{
+brand:"SAQSY",menu_home:"Главная",menu_map:"Карта",menu_officers:"Офицеры",menu_reports:"Заявления",
+menu_profile:"Профиль",menu_settings:"Настройки",
+reports_title:"Отправить заявление",subject:"Тема",details:"Описание",
+describe:"Опишите инцидент...",send_btn:"Отправить",success_msg:"✅ Успешно отправлено!"
+},
+kz:{
+brand:"SAQSY",menu_home:"Басты бет",menu_map:"Карта",menu_officers:"Офицерлер",menu_reports:"Өтініштер",
+menu_profile:"Профиль",menu_settings:"Баптаулар",
+reports_title:"Өтініш беру",subject:"Тақырып",details:"Толық ақпарат",
+describe:"Оқиғаны сипаттаңыз...",send_btn:"Жіберу",success_msg:"✅ Сәтті жіберілді!"
+}
+};
+
+function setLang(lang){
+    localStorage.setItem("lang",lang);
+    updateLang();
+}
+function updateLang(){
+    const lang = localStorage.getItem("lang") || "en";
+    document.querySelectorAll("[data-i18n]").forEach(el=>{
+        const key = el.getAttribute("data-i18n");
+        el.textContent = translations[lang][key];
+    });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{
+        el.placeholder = translations[lang][el.getAttribute("data-i18n-placeholder")];
+    });
+}
+updateLang();
+</script>
+
+<script src="app.js"></script>
+</body>
+</html>
