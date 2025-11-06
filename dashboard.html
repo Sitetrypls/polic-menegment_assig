@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>SAQSY Dashboard</title>
+<title>SAQSY — Dashboard</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
 <style>
 body {
     margin: 0;
@@ -14,6 +13,8 @@ body {
     display: flex;
     height: 100vh;
 }
+
+/* Sidebar */
 .sidebar {
     width: 230px;
     background: #1B263B;
@@ -32,101 +33,13 @@ body {
     color: #dfe6ee;
     text-decoration: none;
     font-size: 17px;
-    transition: 0.2s;
+    transition: .2s;
 }
 .menu a:hover, .active {
     background: #415A77;
     color: #fff;
 }
+
+/* Content */
 .content {
-    flex: 1;
-    padding: 40px;
-    overflow-y: auto;
-}
-h1 {
-    font-size: 32px;
-    margin-bottom: 30px;
-}
-.cards {
-    display: flex;
-    gap: 25px;
-}
-.card {
-    background: #1B263B;
-    padding: 25px;
-    width: 300px;
-    border-radius: 14px;
-    border: 1px solid #415A77;
-}
-.card-title {
-    font-size: 20px;
-    opacity: 0.8;
-}
-.card-value {
-    font-size: 42px;
-    font-weight: bold;
-    margin-top: 10px;
-    color: #4DA3FF;
-}
-.lang-switch {
-    text-align: center;
-    margin-top: 20px;
-}
-.lang-switch button {
-    background: none;
-    border: 1px solid #4DA3FF;
-    padding: 5px 12px;
-    cursor: pointer;
-    color: #4DA3FF;
-    border-radius: 6px;
-    margin: 0 5px;
-    transition: 0.3s;
-}
-.lang-switch button:hover {
-    background: #4DA3FF;
-    color: #fff;
-}
-</style>
-
-</head>
-
-<body>
-
-<div class="sidebar">
-    <div class="logo" data-i18n="brand">SAQSY</div>
-
-    <div class="menu">
-        <a href="#" class="active" data-i18n="menu_home"><i class="fa-solid fa-house"></i> Home</a>
-        <a href="#" data-i18n="menu_map"><i class="fa-solid fa-map"></i> Map</a>
-        <a href="#" data-i18n="menu_officers"><i class="fa-solid fa-users"></i> Officers</a>
-        <a href="#" data-i18n="menu_reports"><i class="fa-solid fa-file"></i> Reports</a>
-        <a href="#" data-i18n="menu_settings"><i class="fa-solid fa-gear"></i> Settings</a>
-    </div>
-
-    <div class="lang-switch">
-        <button onclick="setLang('en')">EN</button>
-        <button onclick="setLang('ru')">RU</button>
-        <button onclick="setLang('kz')">KZ</button>
-    </div>
-</div>
-
-<div class="content">
-    <h1 data-i18n="dashboard_title">Dashboard</h1>
-
-    <div class="cards">
-        <div class="card">
-            <div class="card-title" data-i18n="stations">Stations</div>
-            <div class="card-value">3</div>
-        </div>
-        <div class="card">
-            <div class="card-title" data-i18n="officers">Officers</div>
-            <div class="card-value">7</div>
-        </div>
-        <div class="card">
-            <div class="card-title" data-i18n="reports">Reports</div>
-            <div class="card-value">12</div>
-        </div>
-    </div>
-</div>
-
-<script
+    flex:
