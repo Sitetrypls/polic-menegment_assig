@@ -1,0 +1,165 @@
+/* style.css — глобальные стили + темы + topbar + анимации */
+
+/* --- базовые цвета --- */
+:root{
+  --bg-dark: #0D1B2A;
+  --panel-dark: #1B263B;
+  --accent: #3D8BFF;
+  --accent-2: #415A77;
+  --text-light: #ffffff;
+  --muted: rgba(255,255,255,0.8);
+
+  /* light theme colors */
+  --bg-light: #ffffff;
+  --panel-light: #E8F1FF;
+  --text-dark: #0D1B2A;
+  --muted-dark: rgba(13,27,42,0.75);
+}
+
+/* переходы темы */
+:root {
+  transition: color 250ms ease, background-color 250ms ease;
+}
+
+/* --- default (dark) --- */
+html, body {
+  height: 100%;
+  background: var(--bg-dark);
+  color: var(--text-light);
+}
+
+/* light theme applied on <html>.light-theme */
+html.light-theme {
+  background: var(--bg-light);
+  color: var(--text-dark);
+}
+
+/* panels (sidebars, cards) respond to theme */
+.sidebar, .card, .container, .content, .profile-box, .list, .table, .setting {
+  transition: background-color 250ms ease, border-color 250ms ease, color 250ms ease;
+}
+
+/* dark variants (existing) */
+.sidebar, .card, .container, .list {
+  background: var(--panel-dark);
+  border-color: var(--accent-2);
+}
+
+/* light variants when html.light-theme */
+html.light-theme .sidebar,
+html.light-theme .card,
+html.light-theme .container,
+html.light-theme .list {
+  background: var(--panel-light);
+  border-color: rgba(61,139,255,0.18);
+}
+
+/* text colors adapt */
+html.light-theme .menu a { color: var(--text-dark); }
+html.light-theme .content { color: var(--text-dark); }
+
+/* ------ Topbar (right-top) ------ */
+#topbar {
+  position: fixed;
+  top: 12px;
+  right: 18px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  z-index: 1100;
+  font-family: Arial, sans-serif;
+}
+
+/* theme button */
+#themeBtn {
+  background: transparent;
+  border: 1px solid rgba(77,163,255,0.9);
+  color: var(--text-light);
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.18s ease, background 0.18s;
+}
+#themeBtn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.15); }
+html.light-theme #themeBtn {
+  border-color: rgba(61,139,255,0.9);
+  color: var(--text-dark);
+  background: rgba(61,139,255,0.06);
+}
+
+/* language dropdown wrapper */
+.lang-dropdown {
+  position: relative;
+  display: inline-block;
+}
+.lang-toggle {
+  background: transparent;
+  border: 1px solid rgba(77,163,255,0.9);
+  color: var(--text-light);
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.18s, background 0.18s;
+}
+.lang-toggle:hover { transform: translateY(-2px); }
+html.light-theme .lang-toggle { color: var(--text-dark); background: rgba(61,139,255,0.04); border-color: rgba(61,139,255,0.9); }
+
+/* chevron */
+.lang-toggle .chev { font-size: 12px; opacity: .9; }
+
+/* dropdown menu */
+.lang-list {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  min-width: 150px;
+  background: var(--panel-dark);
+  border: 1px solid var(--accent-2);
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+  overflow: hidden;
+  display: none;
+  animation: pop 160ms ease;
+}
+html.light-theme .lang-list {
+  background: var(--panel-light);
+  border-color: rgba(61,139,255,0.12);
+  box-shadow: 0 10px 30px rgba(13,27,42,0.06);
+}
+.lang-list.show { display: block; }
+
+/* list items */
+.lang-item {
+  padding: 10px 12px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text-light);
+  transition: background 0.14s, color 0.14s;
+}
+.lang-item:hover { background: rgba(77,163,255,0.08); }
+html.light-theme .lang-item { color: var(--text-dark); }
+.lang-item + .lang-item { border-top: 1px solid rgba(255,255,255,0.04); }
+
+/* pop animation */
+@keyframes pop {
+  from { transform: translateY(-6px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* subtle button animation for all .btn */
+.btn {
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+.btn:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(61,139,255,0.12); }
+.btn:active { transform: scale(0.98); }
+
+/* adapt topbar look on small screens just in case */
+@media (max-width:900px){
+  #topbar { right: 10px; top: 8px; gap:8px; }
+  .lang-list { right: -8px; min-width:120px; }
+}
