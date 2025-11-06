@@ -34,7 +34,7 @@ body {
     color: #dfe6ee;
     text-decoration: none;
     font-size: 17px;
-    transition: 0.2s;
+    transition: .2s;
 }
 .menu a:hover, .active {
     background: #415A77;
@@ -142,9 +142,81 @@ input {
         <a href="officers.html"><i class="fa-solid fa-users"></i> <span data-i18n="menu_officers">Officers</span></a>
         <a href="reports.html"><i class="fa-solid fa-file"></i> <span data-i18n="menu_reports">Reports</span></a>
         <a href="#" class="active"><i class="fa-solid fa-user"></i> <span data-i18n="menu_profile">Profile</span></a>
+        <a href="settings.html"><i class="fa-solid fa-gear"></i> <span data-i18n="menu_settings">Settings</span></a>
     </div>
 
     <div class="lang-switch">
         <button onclick="setLang('en')">EN</button>
         <button onclick="setLang('ru')">RU</button>
-        <button onclick="setL
+        <button onclick="setLang('kz')">KZ</button>
+    </div>
+</div>
+
+<div class="content">
+    <h1 data-i18n="profile_title">Profile</h1>
+
+    <div class="profile-box">
+        <div class="avatar">U</div>
+        <div class="fullname" data-i18n="user_name">User Name</div>
+        <div class="email" data-i18n="email">user@email.com</div>
+    </div>
+
+    <label data-i18n="phone">Phone Number</label>
+    <input type="text" placeholder="+7 777 123 45 67">
+
+    <label data-i18n="password">New Password</label>
+    <input type="password" placeholder="********">
+
+    <button class="btn" onclick="saveProfile()" data-i18n="save_btn">Save</button>
+
+    <div class="success" id="ok" data-i18n="saved_msg">
+        ✅ Saved successfully!
+    </div>
+</div>
+
+<script>
+function saveProfile() {
+    document.getElementById("ok").style.display = "block";
+    setTimeout(() => {
+        document.getElementById("ok").style.display = "none";
+    }, 2000);
+}
+
+const translations = {
+en:{
+brand:"SAQSY",menu_home:"Home",menu_map:"Map",menu_officers:"Officers",
+menu_reports:"Reports",menu_profile:"Profile",menu_settings:"Settings",
+profile_title:"Profile",user_name:"User Name",email:"user@email.com",
+phone:"Phone Number",password:"New Password",save_btn:"Save",
+saved_msg:"✅ Saved successfully!"
+},
+ru:{
+brand:"SAQSY",menu_home:"Главная",menu_map:"Карта",menu_officers:"Офицеры",
+menu_reports:"Заявления",menu_profile:"Профиль",menu_settings:"Настройки",
+profile_title:"Профиль",user_name:"Имя пользователя",email:"user@email.com",
+phone:"Номер телефона",password:"Новый пароль",save_btn:"Сохранить",
+saved_msg:"✅ Сохранено!"
+},
+kz:{
+brand:"SAQSY",menu_home:"Басты бет",menu_map:"Карта",menu_officers:"Офицерлер",
+menu_reports:"Өтініштер",menu_profile:"Профиль",menu_settings:"Баптаулар",
+profile_title:"Профиль",user_name:"Пайдаланушы аты",email:"user@email.com",
+phone:"Телефон нөмірі",password:"Жаңа құпия сөз",save_btn:"Сақтау",
+saved_msg:"✅ Сәтті сақталды!"
+}
+};
+
+function setLang(lang){localStorage.setItem("lang",lang);updateLang();}
+function updateLang(){
+const lang=localStorage.getItem("lang")||"en";
+document.querySelectorAll("[data-i18n]").forEach(el=>{
+const key=el.getAttribute("data-i18n");
+el.textContent=translations[lang][key];
+});
+}
+updateLang();
+</script>
+
+<script src="app.js"></script>
+</body>
+</html>
