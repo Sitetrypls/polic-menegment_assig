@@ -3,108 +3,48 @@
 <head>
 <meta charset="UTF-8">
 <title>SAQSY — Officers</title>
+<link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
 <style>
-body {
-    margin: 0;
-    background: #0D1B2A;
-    font-family: Arial, sans-serif;
-    color: #fff;
-    display: flex;
-    height: 100vh;
-}
-
-/* Sidebar */
-.sidebar {
-    width: 230px;
-    background: #1B263B;
-    padding: 30px 0;
-    border-right: 2px solid #415A77;
-}
-.logo {
-    font-size: 28px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 40px;
-}
-.menu a {
-    display: block;
-    padding: 18px 30px;
-    color: #dfe6ee;
-    text-decoration: none;
-    font-size: 17px;
-    transition: .2s;
-}
-.menu a:hover, .active {
-    background: #415A77;
-    color: #fff;
-}
-
-/* Content */
 .content {
-    flex: 1;
-    padding: 40px;
-}
-h1 {
-    font-size: 32px;
-    margin-bottom: 20px;
+  flex: 1;
+  padding: 40px;
 }
 
-/* Table */
-.table {
-    width: 100%;
-    border-collapse: collapse;
+/* Table styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 25px;
 }
-.table th {
-    text-align: left;
-    padding: 10px;
-    font-size: 16px;
-    opacity: 0.8;
+th, td {
+  padding: 14px;
+  border-bottom: 1px solid var(--accent-2);
+  text-align: left;
 }
-.table td {
-    padding: 12px 10px;
-    border-bottom: 1px solid #415A77;
+th {
+  font-weight: bold;
+  font-size: 18px;
 }
-.avatar {
-    width: 40px;
-    height: 40px;
-    background: #4DA3FF;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 40px;
-    font-weight: bold;
-    color: #fff;
-    margin-right: 10px;
-    display: inline-block;
-}
-
-/* Status */
 .status {
-    padding: 5px 10px;
-    border-radius: 8px;
-    font-size: 14px;
+  font-weight: bold;
 }
-.on-duty { background: #2ECC71; }
-.available { background: #3498DB; }
-.patrol { background: #F1C40F; }
+.status.on { color: #2ECC71; }
+.status.off { color: #d9534f; }
 
-.lang-switch {
-    text-align: center;
-    margin-top: 20px;
+.view-btn {
+  background: var(--accent);
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform .2s;
 }
-.lang-switch button {
-    background: none;
-    border: 1px solid #4DA3FF;
-    padding: 4px 10px;
-    color: #4DA3FF;
-    border-radius: 5px;
-    margin: 0 4px;
-    cursor: pointer;
-}
-.lang-switch button:hover {
-    background: #4DA3FF;
-    color: #fff;
+.view-btn:hover {
+  transform: scale(1.05);
 }
 </style>
 </head>
@@ -112,119 +52,140 @@ h1 {
 <body>
 
 <div class="sidebar">
-    <div class="logo" data-i18n="brand">SAQSY</div>
+  <div class="logo" data-i18n="brand">SAQSY</div>
 
-    <div class="menu">
-        <a href="dashboard.html"><i class="fa-solid fa-house"></i> <span data-i18n="menu_home">Home</span></a>
-        <a href="map.html"><i class="fa-solid fa-map"></i> <span data-i18n="menu_map">Map</span></a>
-        <a href="#" class="active"><i class="fa-solid fa-users"></i> <span data-i18n="menu_officers">Officers</span></a>
-        <a href="reports.html"><i class="fa-solid fa-file"></i> <span data-i18n="menu_reports">Reports</span></a>
-        <a href="profile.html"><i class="fa-solid fa-user"></i> <span data-i18n="menu_profile">Profile</span></a>
-        <a href="settings.html"><i class="fa-solid fa-gear"></i> <span data-i18n="menu_settings">Settings</span></a>
-    </div>
-
-    <div class="lang-switch">
-        <button onclick="setLang('en')">EN</button>
-        <button onclick="setLang('ru')">RU</button>
-        <button onclick="setLang('kz')">KZ</button>
-    </div>
+  <div class="menu">
+    <a href="dashboard.html"><i class="fa-solid fa-house"></i> <span data-i18n="menu_home">Home</span></a>
+    <a href="map.html"><i class="fa-solid fa-map"></i> <span data-i18n="menu_map">Map</span></a>
+    <a href="#" class="active"><i class="fa-solid fa-users"></i> <span data-i18n="menu_officers">Officers</span></a>
+    <a href="reports.html"><i class="fa-solid fa-file"></i> <span data-i18n="menu_reports">Reports</span></a>
+    <a href="profile.html"><i class="fa-solid fa-user"></i> <span data-i18n="menu_profile">Profile</span></a>
+    <a href="settings.html"><i class="fa-solid fa-gear"></i> <span data-i18n="menu_settings">Settings</span></a>
+  </div>
 </div>
 
+<!-- TopBar auto added -->
+
 <div class="content">
-    <h1 data-i18n="officers_title">Officers</h1>
+  <h1 data-i18n="officers_title">Officers</h1>
 
-    <table class="table">
-        <tr>
-            <th data-i18n="th_name">Name</th>
-            <th data-i18n="th_rank">Rank</th>
-            <th data-i18n="th_station">Station</th>
-            <th data-i18n="th_status">Status</th>
-        </tr>
+  <table>
+    <thead>
+      <tr>
+        <th data-i18n="name">Name</th>
+        <th data-i18n="rank">Rank</th>
+        <th data-i18n="status">Status</th>
+        <th data-i18n="location">Location</th>
+      </tr>
+    </thead>
+    <tbody>
 
-        <tr>
-            <td><div class="avatar">НӘ</div> <span data-i18n="o1_name">Nurzhan Adilbekov</span></td>
-            <td data-i18n="o1_rank">Captain</td>
-            <td data-i18n="o1_station">Central</td>
-            <td><span class="status on-duty" data-i18n="on_duty">On Duty</span></td>
-        </tr>
+      <tr>
+        <td>Officer A</td>
+        <td data-i18n="rank_sgt">Sergeant</td>
+        <td class="status on" data-i18n="on_duty">On duty</td>
+        <td><button class="view-btn" onclick="view(51.1645,71.4704)" data-i18n="view_map">View</button></td>
+      </tr>
 
-        <tr>
-            <td><div class="avatar">АҚ</div> <span data-i18n="o2_name">Aidana Kair</span></td>
-            <td data-i18n="o2_rank">Sergeant</td>
-            <td data-i18n="o2_station">North</td>
-            <td><span class="status available" data-i18n="available">Available</span></td>
-        </tr>
+      <tr>
+        <td>Officer B</td>
+        <td data-i18n="rank_lt">Lieutenant</td>
+        <td class="status off" data-i18n="off_duty">Off duty</td>
+        <td><button class="view-btn" onclick="view(51.1532,71.4631)" data-i18n="view_map">View</button></td>
+      </tr>
 
-        <tr>
-            <td><div class="avatar">ЕТ</div> <span data-i18n="o3_name">Yerlan Tursynov</span></td>
-            <td data-i18n="o3_rank">Officer</td>
-            <td data-i18n="o3_station">South</td>
-            <td><span class="status patrol" data-i18n="patrol">Patrol</span></td>
-        </tr>
+      <tr>
+        <td>Officer C</td>
+        <td data-i18n="rank_of">Officer</td>
+        <td class="status on" data-i18n="on_duty">On duty</td>
+        <td><button class="view-btn" onclick="view(51.1678,71.4805)" data-i18n="view_map">View</button></td>
+      </tr>
 
-        <tr>
-            <td><div class="avatar">МС</div> <span data-i18n="o4_name">Moldir Serik</span></td>
-            <td data-i18n="o4_rank">Lieutenant</td>
-            <td data-i18n="o4_station">Central</td>
-            <td><span class="status available" data-i18n="available">Available</span></td>
-        </tr>
+    </tbody>
+  </table>
 
-        <tr>
-            <td><div class="avatar">АБ</div> <span data-i18n="o5_name">Ayan Beken</span></td>
-            <td data-i18n="o5_rank">Officer</td>
-            <td data-i18n="o5_station">North</td>
-            <td><span class="status on-duty" data-i18n="on_duty">On Duty</span></td>
-        </tr>
-    </table>
 </div>
 
 <script>
+// Go to map with preset position
+function view(lat, lon){
+  localStorage.setItem("map_lat", lat);
+  localStorage.setItem("map_lon", lon);
+  window.location.href = "map.html";
+}
+
 const translations = {
-    en: {
-        brand:"SAQSY",menu_home:"Home",menu_map:"Map",menu_officers:"Officers",
-        menu_reports:"Reports",menu_profile:"Profile",menu_settings:"Settings",
-        officers_title:"Officers",th_name:"Name",th_rank:"Rank",th_station:"Station",th_status:"Status",
-        on_duty:"On Duty",available:"Available",patrol:"Patrol",
-        o1_name:"Nurzhan Adilbekov",o1_rank:"Captain",o1_station:"Central",
-        o2_name:"Aidana Kair",o2_rank:"Sergeant",o2_station:"North",
-        o3_name:"Yerlan Tursynov",o3_rank:"Officer",o3_station:"South",
-        o4_name:"Moldir Serik",o4_rank:"Lieutenant",o4_station:"Central",
-        o5_name:"Ayan Beken",o5_rank:"Officer",o5_station:"North"
-    },
-    ru: {
-        brand:"SAQSY",menu_home:"Главная",menu_map:"Карта",menu_officers:"Офицеры",
-        menu_reports:"Заявления",menu_profile:"Профиль",menu_settings:"Настройки",
-        officers_title:"Офицеры",th_name:"Имя",th_rank:"Звание",th_station:"Станция",th_status:"Статус",
-        on_duty:"Дежурит",available:"Свободен",patrol:"Патруль",
-        o1_name:"Нұржан Әділбеков",o1_rank:"Капитан",o1_station:"Центральная",
-        o2_name:"Айдана Қайыр",o2_rank:"Сержант",o2_station:"Северная",
-        o3_name:"Ерлан Тұрсынов",o3_rank:"Офицер",o3_station:"Южная",
-        o4_name:"Мөлдір Серік",o4_rank:"Лейтенант",o4_station:"Центральная",
-        o5_name:"Аян Бекен",o5_rank:"Офицер",o5_station:"Северная"
-    },
-    kz: {
-        brand:"SAQSY",menu_home:"Басты бет",menu_map:"Карта",menu_officers:"Офицерлер",
-        menu_reports:"Өтініштер",menu_profile:"Профиль",menu_settings:"Баптаулар",
-        officers_title:"Офицерлер",th_name:"Аты-жөні",th_rank:"Шені",th_station:"Бөлім",th_status:"Мәртебесі",
-        on_duty:"Қызметте",available:"Бос",patrol:"Патрульде",
-        o1_name:"Нұржан Әділбеков",o1_rank:"Капитан",o1_station:"Орталық",
-        o2_name:"Айдана Қайыр",o2_rank:"Сержант",o2_station:"Солтүстік",
-        o3_name:"Ерлан Тұрсынов",o3_rank:"Офицер",o3_station:"Оңтүстік",
-        o4_name:"Мөлдір Серік",o4_rank:"Лейтенант",o4_station:"Орталық",
-        o5_name:"Аян Бекен",o5_rank:"Офицер",o5_station:"Солтүстік"
-    }
+en:{
+  brand:"SAQSY",
+  menu_home:"Home",
+  menu_map:"Map",
+  menu_officers:"Officers",
+  menu_reports:"Reports",
+  menu_profile:"Profile",
+  menu_settings:"Settings",
+
+  officers_title:"Officers",
+  name:"Name",
+  rank:"Rank",
+  status:"Status",
+  location:"Location",
+  rank_sgt:"Sergeant",
+  rank_lt:"Lieutenant",
+  rank_of:"Officer",
+  on_duty:"On duty",
+  off_duty:"Off duty",
+  view_map:"View"
+},
+ru:{
+  brand:"SAQSY",
+  menu_home:"Главная",
+  menu_map:"Карта",
+  menu_officers:"Офицеры",
+  menu_reports:"Заявления",
+  menu_profile:"Профиль",
+  menu_settings:"Настройки",
+
+  officers_title:"Список офицеров",
+  name:"Имя",
+  rank:"Звание",
+  status:"Статус",
+  location:"Локация",
+  rank_sgt:"Сержант",
+  rank_lt:"Лейтенант",
+  rank_of:"Офицер",
+  on_duty:"На службе",
+  off_duty:"Не на службе",
+  view_map:"Карта"
+},
+kz:{
+  brand:"SAQSY",
+  menu_home:"Басты бет",
+  menu_map:"Карта",
+  menu_officers:"Офицерлер",
+  menu_reports:"Өтініштер",
+  menu_profile:"Профиль",
+  menu_settings:"Баптаулар",
+
+  officers_title:"Офицерлер тізімі",
+  name:"Аты",
+  rank:"Шені",
+  status:"Күйі",
+  location:"Орналасуы",
+  rank_sgt:"Сержант",
+  rank_lt:"Лейтенант",
+  rank_of:"Офицер",
+  on_duty:"Қызметте",
+  off_duty:"Қызметте емес",
+  view_map:"Көру"
+}
 };
 
-function setLang(lang){
-    localStorage.setItem("lang",lang);
-    updateLang();
-}
 function updateLang(){
-    const lang=localStorage.getItem("lang")||"en";
-    document.querySelectorAll("[data-i18n]").forEach(el=>{
-        const key=el.getAttribute("data-i18n");
-        el.textContent=translations[lang][key];
-    });
+  const lang = localStorage.getItem('saqsy_lang') || 'en';
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const k = el.getAttribute("data-i18n");
+    if(translations[lang][k]) el.textContent = translations[lang][k];
+  });
 }
 updateLang();
 </script>
