@@ -2,213 +2,174 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>SAQSY — Profile</title>
+<title>SAQSY — Register</title>
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
 <style>
-.content {
-  flex: 1;
+.main-box {
+  width: 380px;
+  margin: auto;
+  background: var(--panel-dark);
   padding: 40px;
+  border-radius: 14px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.35);
+  transition: background 250ms ease;
+}
+html.light-theme .main-box {
+  background: var(--panel-light);
+  box-shadow: 0 0 25px rgba(0,0,0,0.08);
 }
 
-h1 {
-  font-size: 32px;
-  margin-bottom: 25px;
-}
-
-.profile-box {
+.logo-big {
+  font-size: 48px;
   text-align: center;
-  margin-bottom: 35px;
-}
-
-.avatar {
-  width: 130px;
-  height: 130px;
-  background: var(--accent);
-  border-radius: 50%;
-  line-height: 130px;
-  font-size: 55px;
+  margin-bottom: 20px;
   font-weight: bold;
-  margin: 0 auto 14px;
-  color: #fff;
-  user-select: none;
 }
 
 label {
   display: block;
-  margin: 14px 0 6px;
+  margin: 16px 0 6px;
   font-size: 15px;
 }
 
 input {
   width: 100%;
   padding: 12px;
-  border-radius: 10px;
+  border-radius: 12px;
   background: #E0E5EB;
   border: none;
   font-size: 16px;
+  margin-bottom: 10px;
 }
 
-.btn-save {
+.btn-main {
   width: 100%;
   padding: 14px;
-  margin-top: 22px;
+  margin-top: 16px;
   font-size: 18px;
   background: var(--accent);
-  border-radius: 10px;
   border: none;
+  border-radius: 10px;
   color: #fff;
   font-weight: bold;
   cursor: pointer;
 }
 
-.success {
-  background: #2ECC71;
-  color: #fff;
-  padding: 14px;
-  border-radius: 10px;
+.login-link {
   text-align: center;
-  font-weight: bold;
   margin-top: 20px;
-  display: none;
+  color: var(--muted);
+}
+.login-link a {
+  color: var(--accent);
+  font-weight: bold;
+  text-decoration: none;
 }
 </style>
+
 </head>
 
 <body>
 
-<div class="sidebar">
-  <div class="logo" data-i18n="brand">SAQSY</div>
-
-  <div class="menu">
-    <a href="dashboard.html"><i class="fa-solid fa-house"></i> <span data-i18n="menu_home">Home</span></a>
-    <a href="map.html"><i class="fa-solid fa-map"></i> <span data-i18n="menu_map">Map</span></a>
-    <a href="officers.html"><i class="fa-solid fa-users"></i> <span data-i18n="menu_officers">Officers</span></a>
-    <a href="reports.html"><i class="fa-solid fa-file"></i> <span data-i18n="menu_reports">Reports</span></a>
-    <a href="#" class="active"><i class="fa-solid fa-user"></i> <span data-i18n="menu_profile">Profile</span></a>
-    <a href="settings.html"><i class="fa-solid fa-gear"></i> <span data-i18n="menu_settings">Settings</span></a>
-  </div>
-</div>
-
 <!-- TopBar auto added -->
 
-<div class="content">
-  <h1 data-i18n="profile_title">Profile</h1>
+<div style="display:flex;height:100vh;align-items:center;justify-content:center;">
+  <div class="main-box">
 
-  <div class="profile-box">
-    <div class="avatar" id="avatar">U</div>
-    <div class="fullname" id="fullnameDisplay">User</div>
+    <div class="logo-big" data-i18n="brand">SAQSY</div>
+
+    <label data-i18n="fullname">Full Name</label>
+    <input type="text" id="reg_name" data-i18n-placeholder="fullname_ph">
+
+    <label data-i18n="email">Email</label>
+    <input type="email" id="reg_email" data-i18n-placeholder="email_ph">
+
+    <label data-i18n="password">Password</label>
+    <input type="password" id="reg_pass" data-i18n-placeholder="password_ph">
+
+    <button class="btn btn-main" onclick="register()" data-i18n="register_btn">Register</button>
+
+    <div class="login-link">
+      <span data-i18n="have_acc">Already have an account?</span>
+      <a href="index.html" data-i18n="sign_in_link">Sign In</a>
+    </div>
+
   </div>
-
-  <label data-i18n="your_name">Your Name</label>
-  <input type="text" id="fullname" data-i18n-placeholder="your_name_ph">
-
-  <label data-i18n="phone">Phone</label>
-  <input type="text" id="phone" data-i18n-placeholder="phone_ph">
-
-  <button class="btn btn-save" onclick="saveProfile()" data-i18n="save_btn">Save</button>
-
-  <div class="success" id="ok" data-i18n="saved_msg">✅ Saved!</div>
 </div>
 
 <script>
-// Load saved profile
-function loadProfile(){
-  let fullname = localStorage.getItem("user_fullname") || "User";
-  let phone = localStorage.getItem("user_phone") || "";
+// Fake registration logic
+function register(){
+  const name = document.getElementById("reg_name").value.trim();
+  const email = document.getElementById("reg_email").value.trim();
+  const pass = document.getElementById("reg_pass").value.trim();
 
-  document.getElementById("fullname").value = fullname;
-  document.getElementById("phone").value = phone;
-  document.getElementById("avatar").textContent = fullname.charAt(0);
-  document.getElementById("fullnameDisplay").textContent = fullname;
-}
+  if(!name || !email || !pass){
+    alert("Please fill all fields!");
+    return;
+  }
 
-// Save profile button
-function saveProfile(){
-  const name = document.getElementById("fullname").value;
-  const phone = document.getElementById("phone").value;
-
+  // Save to local storage
   localStorage.setItem("user_fullname", name);
-  localStorage.setItem("user_phone", phone);
+  localStorage.setItem("user_email", email);
 
-  document.getElementById("avatar").textContent = name.charAt(0);
-  document.getElementById("fullnameDisplay").textContent = name;
-
-  document.getElementById("ok").style.display = "block";
-  setTimeout(() => {
-    document.getElementById("ok").style.display = "none";
-  }, 2000);
+  window.location.href = "dashboard.html";
 }
 
-// ------------------ Translations ------------------
+// ----------------- Translations -----------------
 const translations = {
 en:{
   brand:"SAQSY",
-  menu_home:"Home",
-  menu_map:"Map",
-  menu_officers:"Officers",
-  menu_reports:"Reports",
-  menu_profile:"Profile",
-  menu_settings:"Settings",
-
-  profile_title:"Profile",
-  your_name:"Full Name",
-  your_name_ph:"Enter name...",
-  phone:"Phone Number",
-  phone_ph:"Enter phone...",
-  save_btn:"Save",
-  saved_msg:"✅ Saved!"
+  fullname:"Full Name",
+  fullname_ph:"Enter your name...",
+  email:"Email",
+  email_ph:"Enter email...",
+  password:"Password",
+  password_ph:"Enter password...",
+  register_btn:"Register",
+  have_acc:"Already have an account?",
+  sign_in_link:"Sign In"
 },
 ru:{
   brand:"SAQSY",
-  menu_home:"Главная",
-  menu_map:"Карта",
-  menu_officers:"Офицеры",
-  menu_reports:"Заявления",
-  menu_profile:"Профиль",
-  menu_settings:"Настройки",
-
-  profile_title:"Профиль",
-  your_name:"Имя и фамилия",
-  your_name_ph:"Введите имя...",
-  phone:"Телефон",
-  phone_ph:"Введите телефон...",
-  save_btn:"Сохранить",
-  saved_msg:"✅ Сохранено!"
+  fullname:"Имя и фамилия",
+  fullname_ph:"Введите имя...",
+  email:"Почта",
+  email_ph:"Введите email...",
+  password:"Пароль",
+  password_ph:"Введите пароль...",
+  register_btn:"Регистрация",
+  have_acc:"Уже есть аккаунт?",
+  sign_in_link:"Войти"
 },
 kz:{
   brand:"SAQSY",
-  menu_home:"Басты бет",
-  menu_map:"Карта",
-  menu_officers:"Офицерлер",
-  menu_reports:"Өтініштер",
-  menu_profile:"Профиль",
-  menu_settings:"Баптаулар",
-
-  profile_title:"Профиль",
-  your_name:"Толық аты",
-  your_name_ph:"Атыңызды енгізіңіз...",
-  phone:"Телефон",
-  phone_ph:"Телефон енгізіңіз...",
-  save_btn:"Сақтау",
-  saved_msg:"✅ Сәтті сақталды!"
+  fullname:"Толық аты",
+  fullname_ph:"Аты-жөніңізді енгізіңіз...",
+  email:"Email",
+  email_ph:"Email енгізіңіз...",
+  password:"Құпия сөз",
+  password_ph:"Құпия сөз енгізіңіз...",
+  register_btn:"Тіркелу",
+  have_acc:"Аккаунтыңыз бар ма?",
+  sign_in_link:"Кіру"
 }
 };
 
 function updateLang(){
-  const lang = localStorage.getItem('saqsy_lang') || 'en';
+  const lang = localStorage.getItem("saqsy_lang") || "en";
   document.querySelectorAll("[data-i18n]").forEach(el=>{
-    const k = el.getAttribute("data-i18n");
-    if(translations[lang][k]) el.textContent = translations[lang][k];
+    const key = el.getAttribute("data-i18n");
+    if(translations[lang][key]) el.textContent = translations[lang][key];
   });
   document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{
-    const k = el.getAttribute("data-i18n-placeholder");
-    if(translations[lang][k]) el.placeholder = translations[lang][k];
+    const key = el.getAttribute("data-i18n-placeholder");
+    if(translations[lang][key]) el.placeholder = translations[lang][key];
   });
 }
 updateLang();
-loadProfile();
 </script>
 
 <script src="app.js"></script>
