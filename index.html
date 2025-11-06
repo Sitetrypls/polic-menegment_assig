@@ -8,72 +8,47 @@
 <style>
 body {
     margin: 0;
-    height: 100vh;
     background: #0D1B2A;
-    font-family: Arial, sans-serif;
     color: #fff;
+    font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
 }
-.card {
-    background: #1B263B;
+.container {
     width: 400px;
+    background: #1B263B;
     padding: 40px;
-    border-radius: 14px;
-    border: 1px solid #415A77;
+    border-radius: 15px;
     text-align: center;
+    border: 1px solid #415A77;
 }
-.logo {
-    font-size: 36px;
-    font-weight: bold;
-    margin-bottom: 15px;
-    color: #4DA3FF;
-}
-label {
-    display: block;
-    margin: 15px 0 6px;
-    text-align: left;
+h1 {
+    margin-bottom: 25px;
 }
 input {
     width: 100%;
-    padding: 13px;
+    padding: 12px;
+    margin-bottom: 15px;
     border-radius: 10px;
     border: none;
     background: #E0E5EB;
 }
 .btn {
     width: 100%;
-    padding: 15px;
-    margin-top: 25px;
+    padding: 12px;
     background: #3D8BFF;
     border: none;
     border-radius: 10px;
     font-size: 18px;
     color: #fff;
     font-weight: bold;
+    margin-top: 10px;
     cursor: pointer;
-    transition: 0.3s;
 }
 .btn:hover {
     background: #1F6EF4;
-    transform: scale(1.03);
-}
-
-.switch-link {
-    margin-top: 15px;
-}
-.switch-link a {
-    color: #4DA3FF;
-    text-decoration: none;
-    font-weight: bold;
-}
-.switch-link a:hover {
-    text-decoration: underline;
-}
-
-.lang-switch {
-    margin-top: 20px;
 }
 .lang-switch button {
     background: none;
@@ -83,66 +58,67 @@ input {
     border-radius: 5px;
     margin: 0 4px;
     cursor: pointer;
-    transition: 0.3s;
 }
 .lang-switch button:hover {
     background: #4DA3FF;
     color: #fff;
+}
+.register {
+    margin-top: 15px;
+    cursor: pointer;
+    opacity: 0.8;
+}
+.register:hover {
+    opacity: 1;
 }
 </style>
 </head>
 
 <body>
 
-<div class="card">
-    <div class="logo" data-i18n="brand">SAQSY</div>
-    <h2 data-i18n="login_title">Sign in</h2>
+<div class="container">
+    <h1 data-i18n="login_title">Sign In</h1>
 
-    <label data-i18n="email">Email</label>
-    <input type="email" placeholder="you@email.com">
+    <input type="text" placeholder="Email" data-i18n-placeholder="email">
+    <input type="password" placeholder="Password" data-i18n-placeholder="password">
 
-    <label data-i18n="password">Password</label>
-    <input type="password" placeholder="••••••••">
+    <button class="btn" onclick="goto('dashboard.html')" data-i18n="signin_btn">Sign In</button>
 
-    <button class="btn" onclick="goDashboard()" data-i18n="login_btn">Sign In</button>
-
-    <div class="switch-link">
-        <span data-i18n="no_account">No account?</span>
-        <a href="#" data-i18n="register_link">Register</a>
+    <div class="register" onclick="goto('register.html')" data-i18n="no_acc">
+        Create Account
     </div>
 
-    <div class="lang-switch">
+    <div class="lang-switch" style="margin-top:20px;">
         <button onclick="setLang('en')">EN</button>
         <button onclick="setLang('ru')">RU</button>
         <button onclick="setLang('kz')">KZ</button>
     </div>
 </div>
 
-
 <script>
-function goDashboard() {
-    window.location.href = "dashboard.html"; // поменяем когда создадим
+const translations = {
+    en:{login_title:"Sign In",email:"Email",password:"Password",signin_btn:"Sign In",no_acc:"Create Account"},
+    ru:{login_title:"Войти",email:"Эл. почта",password:"Пароль",signin_btn:"Войти",no_acc:"Создать аккаунт"},
+    kz:{login_title:"Кіру",email:"Email",password:"Құпия сөз",signin_btn:"Кіру",no_acc:"Тіркелу"}
+};
+
+function setLang(lang){
+    localStorage.setItem("lang",lang);
+    updateLang();
 }
 
-const translations = {
-    en: {
-        brand: "SAQSY",
-        login_title: "Sign in",
-        email: "Email",
-        password: "Password",
-        login_btn: "Sign In",
-        no_account: "No account?",
-        register_link: "Register"
-    },
-    ru: {
-        brand: "SAQSY",
-        login_title: "Вход",
-        email: "Электронная почта",
-        password: "Пароль",
-        login_btn: "Войти",
-        no_account: "Нет аккаунта?",
-        register_link: "Регистрация"
-    },
-    kz: {
-        brand: "SAQSY",
-        login_title: "Кіру",
+function updateLang(){
+    const lang = localStorage.getItem("lang") || "en";
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+        el.textContent = translations[lang][el.getAttribute("data-i18n")];
+    });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+        el.placeholder = translations[lang][el.getAttribute("data-i18n-placeholder")];
+    });
+}
+updateLang();
+</script>
+
+<script src="app.js"></script>
+</body>
+</html>
