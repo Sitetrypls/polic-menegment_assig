@@ -3,93 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <title>SAQSY — Map</title>
+<link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
 <style>
-body {
-    margin: 0;
-    background: #0D1B2A;
-    font-family: Arial, sans-serif;
-    color: #fff;
-    display: flex;
-    height: 100vh;
-}
-
-/* Sidebar */
-.sidebar {
-    width: 230px;
-    background: #1B263B;
-    padding: 30px 0;
-    border-right: 2px solid #415A77;
-}
-.logo {
-    font-size: 28px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 40px;
-}
-.menu a {
-    display: block;
-    padding: 18px 30px;
-    color: #dfe6ee;
-    text-decoration: none;
-    font-size: 17px;
-    transition: .2s;
-}
-.menu a:hover, .active {
-    background: #415A77;
-    color: #fff;
-}
-
-/* Content */
 .content {
-    flex: 1;
-    padding: 40px;
-}
-h1 {
-    font-size: 32px;
-    margin-bottom: 20px;
+  flex: 1;
+  padding: 0;
+  position: relative;
 }
 
-.list {
-    background: #1B263B;
-    padding: 20px;
-    border-radius: 10px;
-    border: 1px solid #415A77;
+#map {
+  height: 100vh;
+  width: calc(100vw - 230px);
+  margin-left: 230px;
 }
 
-.station {
-    display: flex;
-    justify-content: space-between;
-    padding: 12px;
-    border-bottom: 1px solid #415A77;
-}
-.station:last-child { border-bottom: none; }
-
-.status {
-    padding: 4px 10px;
-    border-radius: 7px;
-    font-size: 14px;
-}
-.active-status { background: #2ECC71; }
-.busy-status { background: #E67E22; }
-
-.lang-switch {
-    text-align: center;
-    margin-top: 20px;
-}
-.lang-switch button {
-    background: none;
-    border: 1px solid #4DA3FF;
-    padding: 4px 10px;
-    color: #4DA3FF;
-    border-radius: 5px;
-    margin: 0 4px;
-    cursor: pointer;
-}
-.lang-switch button:hover {
-    background: #4DA3FF;
-    color: #fff;
+/* Dark/Light compatibility */
+html.light-theme #map {
+  filter: brightness(1);
 }
 </style>
 </head>
@@ -97,63 +30,90 @@ h1 {
 <body>
 
 <div class="sidebar">
-    <div class="logo" data-i18n="brand">SAQSY</div>
+  <div class="logo" data-i18n="brand">SAQSY</div>
 
-    <div class="menu">
-        <a href="dashboard.html"><i class="fa-solid fa-house"></i> <span data-i18n="menu_home">Home</span></a>
-        <a href="#" class="active"><i class="fa-solid fa-map"></i> <span data-i18n="menu_map">Map</span></a>
-        <a href="officers.html"><i class="fa-solid fa-users"></i> <span data-i18n="menu_officers">Officers</span></a>
-        <a href="reports.html"><i class="fa-solid fa-file"></i> <span data-i18n="menu_reports">Reports</span></a>
-        <a href="profile.html"><i class="fa-solid fa-user"></i> <span data-i18n="menu_profile">Profile</span></a>
-        <a href="settings.html"><i class="fa-solid fa-gear"></i> <span data-i18n="menu_settings">Settings</span></a>
-    </div>
-
-    <div class="lang-switch">
-        <button onclick="setLang('en')">EN</button>
-        <button onclick="setLang('ru')">RU</button>
-        <button onclick="setLang('kz')">KZ</button>
-    </div>
+  <div class="menu">
+    <a href="dashboard.html"><i class="fa-solid fa-house"></i> <span data-i18n="menu_home">Home</span></a>
+    <a href="#" class="active"><i class="fa-solid fa-map"></i> <span data-i18n="menu_map">Map</span></a>
+    <a href="officers.html"><i class="fa-solid fa-users"></i> <span data-i18n="menu_officers">Officers</span></a>
+    <a href="reports.html"><i class="fa-solid fa-file"></i> <span data-i18n="menu_reports">Reports</span></a>
+    <a href="profile.html"><i class="fa-solid fa-user"></i> <span data-i18n="menu_profile">Profile</span></a>
+    <a href="settings.html"><i class="fa-solid fa-gear"></i> <span data-i18n="menu_settings">Settings</span></a>
+  </div>
 </div>
+
+<!-- TopBar добавится автоматически через app.js -->
 
 <div class="content">
-    <h1 data-i18n="map_title">Police Stations Map</h1>
-
-    <div class="list">
-        <div class="station">
-            <span data-i18n="central_station">Central Station</span>
-            <span class="status active-status" data-i18n="status_active">Active</span>
-        </div>
-        <div class="station">
-            <span data-i18n="north_station">North Station</span>
-            <span class="status busy-status" data-i18n="status_busy">Busy</span>
-        </div>
-        <div class="station">
-            <span data-i18n="south_station">South Station</span>
-            <span class="status active-status" data-i18n="status_active">Active</span>
-        </div>
-    </div>
+  <div id="map"></div>
 </div>
 
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
 <script>
+// Kazakhstan center
+const map = L.map('map').setView([51.1605, 71.4704], 12); // Astana
+
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  maxZoom: 19
+}).addTo(map);
+
+// Police icon
+const policeIcon = L.icon({
+  iconUrl: "https://cdn-icons-png.flaticon.com/512/2977/2977365.png",
+  iconSize: [40, 40],
+  iconAnchor: [20, 40]
+});
+
+// Example officers on map
+const officers = [
+  { name: "Officer A", pos: [51.1645, 71.4704] },
+  { name: "Officer B", pos: [51.1532, 71.4631] },
+  { name: "Officer C", pos: [51.1678, 71.4805] }
+];
+
+officers.forEach(o=>{
+  L.marker(o.pos, { icon: policeIcon }).addTo(map)
+  .bindPopup(`<b>${o.name}</b><br>On duty ✅`);
+});
+
+// 🔹 Translations
 const translations = {
-en:{brand:"SAQSY",menu_home:"Home",menu_map:"Map",menu_officers:"Officers",menu_reports:"Reports",menu_profile:"Profile",menu_settings:"Settings",
-map_title:"Police Stations Map",central_station:"Central Station",north_station:"North Station",south_station:"South Station",
-status_active:"Active",status_busy:"Busy"},
-ru:{brand:"SAQSY",menu_home:"Главная",menu_map:"Карта",menu_officers:"Офицеры",menu_reports:"Заявления",menu_profile:"Профиль",menu_settings:"Настройки",
-map_title:"Карта полицейских участков",central_station:"Центральный участок",north_station:"Северный участок",south_station:"Южный участок",
-status_active:"Активен",status_busy:"Занят"},
-kz:{brand:"SAQSY",menu_home:"Басты бет",menu_map:"Карта",menu_officers:"Офицерлер",menu_reports:"Өтініштер",menu_profile:"Профиль",menu_settings:"Баптаулар",
-map_title:"Полиция бекеттерінің картасы",central_station:"Орталық бекет",north_station:"Солтүстік бекет",south_station:"Оңтүстік бекет",
-status_active:"Белсенді",status_busy:"Бос емес"}
+en:{
+  brand:"SAQSY",
+  menu_home:"Home",
+  menu_map:"Map",
+  menu_officers:"Officers",
+  menu_reports:"Reports",
+  menu_profile:"Profile",
+  menu_settings:"Settings",
+},
+ru:{
+  brand:"SAQSY",
+  menu_home:"Главная",
+  menu_map:"Карта",
+  menu_officers:"Офицеры",
+  menu_reports:"Заявления",
+  menu_profile:"Профиль",
+  menu_settings:"Настройки",
+},
+kz:{
+  brand:"SAQSY",
+  menu_home:"Басты бет",
+  menu_map:"Карта",
+  menu_officers:"Офицерлер",
+  menu_reports:"Өтініштер",
+  menu_profile:"Профиль",
+  menu_settings:"Баптаулар",
+}
 };
 
-function setLang(lang){localStorage.setItem("lang",lang);updateLang();}
 function updateLang(){
-const lang=localStorage.getItem("lang")||"en";
-document.querySelectorAll("[data-i18n]").forEach(el=>{
-const key=el.getAttribute("data-i18n");
-el.textContent=translations[lang][key];
-});
+  const lang = localStorage.getItem('saqsy_lang') || 'en';
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const k = el.getAttribute("data-i18n");
+    if(translations[lang][k]) el.textContent = translations[lang][k];
+  });
 }
 updateLang();
 </script>
