@@ -8,70 +8,55 @@
 <style>
 body {
     margin: 0;
-    height: 100vh;
     background: #0D1B2A;
-    font-family: Arial, sans-serif;
     color: #fff;
+    font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
 }
-.card {
+.container {
+    width: 400px;
     background: #1B263B;
-    width: 420px;
     padding: 40px;
-    border-radius: 14px;
-    border: 1px solid #415A77;
+    border-radius: 15px;
     text-align: center;
+    border: 1px solid #415A77;
 }
-.logo {
-    font-size: 36px;
-    font-weight: bold;
-    margin-bottom: 15px;
-    color: #4DA3FF;
-}
-label {
-    display: block;
-    margin: 15px 0 6px;
-    text-align: left;
+h1 {
+    margin-bottom: 25px;
 }
 input {
     width: 100%;
-    padding: 13px;
+    padding: 12px;
+    margin-bottom: 15px;
     border-radius: 10px;
     border: none;
     background: #E0E5EB;
 }
 .btn {
     width: 100%;
-    padding: 15px;
-    margin-top: 25px;
+    padding: 12px;
     background: #3D8BFF;
     border: none;
     border-radius: 10px;
     font-size: 18px;
     color: #fff;
     font-weight: bold;
+    margin-top: 10px;
     cursor: pointer;
-    transition: 0.3s;
 }
 .btn:hover {
     background: #1F6EF4;
-    transform: scale(1.03);
 }
-.switch-link {
+.back {
     margin-top: 15px;
+    cursor: pointer;
+    opacity: .75;
 }
-.switch-link a {
-    color: #4DA3FF;
-    text-decoration: none;
-    font-weight: bold;
-}
-.switch-link a:hover {
-    text-decoration: underline;
-}
-.lang-switch {
-    margin-top: 20px;
+.back:hover {
+    opacity: 1;
 }
 .lang-switch button {
     background: none;
@@ -81,7 +66,6 @@ input {
     border-radius: 5px;
     margin: 0 4px;
     cursor: pointer;
-    transition: 0.3s;
 }
 .lang-switch button:hover {
     background: #4DA3FF;
@@ -92,27 +76,22 @@ input {
 
 <body>
 
-<div class="card">
-    <div class="logo" data-i18n="brand">SAQSY</div>
-    <h2 data-i18n="register_title">Create Account</h2>
+<div class="container">
+    <h1 data-i18n="register_title">Create Account</h1>
 
-    <label data-i18n="full_name">Full Name</label>
-    <input type="text" placeholder="John Wick">
+    <input type="text" placeholder="Full Name" data-i18n-placeholder="fullname">
+    <input type="email" placeholder="Email" data-i18n-placeholder="email">
+    <input type="password" placeholder="Password" data-i18n-placeholder="password">
 
-    <label data-i18n="email">Email</label>
-    <input type="email" placeholder="you@email.com">
+    <button class="btn" onclick="goto('dashboard.html')" data-i18n="register_btn">
+        Register
+    </button>
 
-    <label data-i18n="password">Password</label>
-    <input type="password" placeholder="••••••••">
-
-    <button class="btn" onclick="goDashboard()" data-i18n="register_btn">Register</button>
-
-    <div class="switch-link">
-        <span data-i18n="have_account">Already have an account?</span>
-        <a href="index.html" data-i18n="login_link">Sign In</a>
+    <div class="back" onclick="goto('index.html')" data-i18n="have_acc">
+        Already have an account?
     </div>
 
-    <div class="lang-switch">
+    <div class="lang-switch" style="margin-top:20px;">
         <button onclick="setLang('en')">EN</button>
         <button onclick="setLang('ru')">RU</button>
         <button onclick="setLang('kz')">KZ</button>
@@ -120,58 +99,37 @@ input {
 </div>
 
 <script>
-function goDashboard() {
-    window.location.href = "dashboard.html"; // перейдёт на главную панель
-}
-
 const translations = {
-    en: {
-        brand: "SAQSY",
-        register_title: "Create Account",
-        full_name: "Full Name",
-        email: "Email",
-        password: "Password",
-        register_btn: "Register",
-        have_account: "Already have an account?",
-        login_link: "Sign In"
-    },
-    ru: {
-        brand: "SAQSY",
-        register_title: "Создать аккаунт",
-        full_name: "Полное имя",
-        email: "Электронная почта",
-        password: "Пароль",
-        register_btn: "Зарегистрироваться",
-        have_account: "Уже есть аккаунт?",
-        login_link: "Войти"
-    },
-    kz: {
-        brand: "SAQSY",
-        register_title: "Аккаунт құру",
-        full_name: "Толық аты-жөні",
-        email: "Электронды пошта",
-        password: "Құпия сөз",
-        register_btn: "Тіркелу",
-        have_account: "Аккаунтыңыз бар ма?",
-        login_link: "Кіру"
-    }
+en:{
+register_title:"Create Account",fullname:"Full Name",email:"Email",password:"Password",
+register_btn:"Sign Up",have_acc:"Already have an account?"
+},
+ru:{
+register_title:"Создать аккаунт",fullname:"Полное имя",email:"Эл. почта",password:"Пароль",
+register_btn:"Зарегистрироваться",have_acc:"Уже есть аккаунт?"
+},
+kz:{
+register_title:"Тіркелу",fullname:"Толық аты-жөні",email:"Email",password:"Құпия сөз",
+register_btn:"Тіркелу",have_acc:"Тіркелгі бар ма?"
+}
 };
 
-function setLang(lang) {
-    localStorage.setItem("lang", lang);
+function setLang(lang){
+    localStorage.setItem("lang",lang);
     updateLang();
 }
-
-function updateLang() {
+function updateLang(){
     const lang = localStorage.getItem("lang") || "en";
-    document.querySelectorAll("[data-i18n]").forEach(el => {
-        const key = el.getAttribute("data-i18n");
-        el.textContent = translations[lang][key];
+    document.querySelectorAll("[data-i18n]").forEach(el=>{
+        el.textContent = translations[lang][el.getAttribute("data-i18n")];
+    });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{
+        el.placeholder = translations[lang][el.getAttribute("data-i18n-placeholder")];
     });
 }
-
 updateLang();
 </script>
 
+<script src="app.js"></script>
 </body>
 </html>
