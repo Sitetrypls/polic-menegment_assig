@@ -144,4 +144,20 @@ map_title:"Карта полицейских участков",central_station:"
 status_active:"Активен",status_busy:"Занят"},
 kz:{brand:"SAQSY",menu_home:"Басты бет",menu_map:"Карта",menu_officers:"Офицерлер",menu_reports:"Өтініштер",menu_profile:"Профиль",menu_settings:"Баптаулар",
 map_title:"Полиция бекеттерінің картасы",central_station:"Орталық бекет",north_station:"Солтүстік бекет",south_station:"Оңтүстік бекет",
-status_active:"Белсенді",status_busy:"Бо
+status_active:"Белсенді",status_busy:"Бос емес"}
+};
+
+function setLang(lang){localStorage.setItem("lang",lang);updateLang();}
+function updateLang(){
+const lang=localStorage.getItem("lang")||"en";
+document.querySelectorAll("[data-i18n]").forEach(el=>{
+const key=el.getAttribute("data-i18n");
+el.textContent=translations[lang][key];
+});
+}
+updateLang();
+</script>
+
+<script src="app.js"></script>
+</body>
+</html>
